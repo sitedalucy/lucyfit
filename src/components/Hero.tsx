@@ -53,7 +53,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg text-gray-600 max-w-xl leading-relaxed">
-            Monitore treinos, acompanhe alimentação e alcance seus objetivos com
+            Monitore seus treinos, acompanhe a sua alimentação e alcance seus objetivos com
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 

@@ -62,10 +62,10 @@ export default function Features() {
             </p>
 
             <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
-              Visual premium, funcionalidades que realmente importam.
+              Funcionalidades que realmente importam.
             </h2>
             <p className="text-gray-600 max-w-lg">
-              Com a LucyFit, você tem as funcionalidades essenciais — sem complicação.
+              Com a LucyFit, você tem as funcionalidades essenciais e sem complicação.
             </p>
           </motion.div>
 

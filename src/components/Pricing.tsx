@@ -35,9 +35,15 @@ const annualBase = {
   interval: "/ mês",
   description: "Pague 12x de R$ 19,99 — economize 40% garantindo 1 ano completo.",
   features: [
-    { name: "Tudo do plano mensal incluído", included: true },
+    { name: "Registro de refeições por foto, texto ou áudio", included: true },
+    { name: "Cálculo automático de calorias e macronutrientes", included: true },
+    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
+    { name: "Análise inteligente da sua alimentação com IA", included: true },
+    { name: "Metas ajustadas conforme seus hábitos", included: true },
+    { name: "Histórico de refeições e treinos no WhatsApp", included: true },
+    { name: "Acompanhamento diário", included: true },
     { name: "Suporte prioritário", included: true },
-    { name: "Melhor custo-benefício", included: true },
+
   ],
   cta: {
     text: "Assinar anual",

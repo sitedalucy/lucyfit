@@ -42,7 +42,6 @@ const annualBase = {
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
     { name: "Acompanhamento diário", included: true },
-    { name: "Suporte prioritário", included: true },
 
   ],
   cta: {

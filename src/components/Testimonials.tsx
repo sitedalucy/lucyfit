@@ -36,89 +36,50 @@ const testimonials = [
     avatar:
       "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&w=80",
   },
-  {
-    name: "Lucas Rocha",
-    role: "Perdeu 5kg e ganhou energia",
-    text: "Não é só contar calorias, é entender o que estou comendo. A Lucy explica o impacto de cada refeição.",
-    avatar:
-      "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&w=80",
-  },
 ];
-
-const extended = [...testimonials, ...testimonials];
-
-function Column({ reverse = false }: { reverse?: boolean }) {
-  return (
-    <motion.div
-      animate={{ y: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-      transition={{
-        duration: 28,
-        ease: "linear",
-        repeat: Infinity,
-      }}
-      className="space-y-4"
-    >
-      {extended.map((t, i) => (
-        <div
-          key={`${t.name}-${i}-${reverse ? "r" : "n"}`}
-          className="bg-white/90 border border-gray-200 rounded-2xl shadow-md p-5 flex gap-4"
-        >
-          <img
-            src={t.avatar}
-            className="w-12 h-12 rounded-full object-cover border border-gray-200"
-          />
-          <div>
-            <p className="text-gray-700 text-sm mb-2">“{t.text}”</p>
-            <p className="font-semibold text-sm">{t.name}</p>
-            <p className="text-[11px] text-gray-500">{t.role}</p>
-          </div>
-        </div>
-      ))}
-    </motion.div>
-  );
-}
 
 export default function Testimonials() {
   return (
-    <section
-      className="py-24 bg-gradient-to-b from-white via-purple-50/20 to-white"
-      id="testimonials"
-    >
+    <section className="py-24 bg-gradient-to-b from-white to-purple-50/40" id="testimonials">
       <div className="container mx-auto max-w-6xl px-6">
-        {/* HEADER MAIS VIVO */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 space-y-4"
-        >
-          <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
-            <span className="text-xs tracking-[0.24em] text-purple-700 font-semibold uppercase">
-              Resultados reais
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Não acredite somente em nós — veja quem já usa.
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-            Junte-se a milhares de pessoas que transformaram sua alimentação
-            usando a LucyFit no dia a dia.
+        <div className="text-center mb-12 space-y-3">
+          <p className="text-xs tracking-[0.25em] text-purple-600 font-semibold uppercase">
+            Resultados reais
           </p>
-        </motion.div>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Não acredite só em nós — veja quem já usa.
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+            Junte-se a milhares de pessoas que transformaram sua alimentação.
+          </p>
+        </div>
 
-        {/* GRID EM CASCATA */}
-        <div className="relative h-[380px] overflow-hidden">
-          {/* Gradientes para dar sensação de fade nas bordas */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Column />
-            <Column reverse />
-          </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="rounded-2xl bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all p-6 flex flex-col gap-4"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={t.avatar}
+                  className="w-12 h-12 rounded-full object-cover border"
+                  alt={t.name}
+                />
+                <div>
+                  <p className="font-semibold text-gray-900">{t.name}</p>
+                  <p className="text-xs text-gray-500">{t.role}</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                “{t.text}”
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

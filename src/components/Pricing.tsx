@@ -24,8 +24,7 @@ const monthlyBase = {
   ],
   cta: {
     text: "Assinar mensal",
-    href:
-      "https://pay.hotmart.com/K102603335O?off=oe515n4q&checkoutMode=10&bid=1765197985158",
+    href: "https://pay.hotmart.com/K102603335O?off=oe515n4q&checkoutMode=10&bid=1765197985158",
   },
 };
 
@@ -33,21 +32,26 @@ const annualBase = {
   name: "PLANO ANUAL",
   price: 19.99,
   interval: "/ mês",
-  description: "Pague 12x de R$ 19,99 — economize 40% garantindo 1 ano completo.",
+  description: "12x R$ 19,99 — Economize mais de 30%",
   features: [
     { name: "Registro de refeições por foto, texto ou áudio", included: true },
-    { name: "Cálculo automático de calorias e macronutrientes", included: true },
-    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
+    {
+      name: "Cálculo automático de calorias e macronutrientes",
+      included: true,
+    },
+    {
+      name: "Sugestões de treino e exercícios para sua rotina",
+      included: true,
+    },
     { name: "Análise inteligente da sua alimentação com IA", included: true },
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
     { name: "Acompanhamento diário", included: true },
-
+    { name: "Suporte prioritário", included: true },
   ],
   cta: {
-    text: "Assinar anual",
-    href:
-      "https://pay.hotmart.com/K102603335O?off=ms9bkn4k&checkoutMode=10&bid=1765197973603",
+    text: "Melhor oferta",
+    href: "https://pay.hotmart.com/K102603335O?off=gv3oc04g&checkoutMode=10",
   },
 };
 
@@ -62,7 +66,6 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="py-28 bg-white relative overflow-hidden">
-
       {/* Glow no fundo */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-100/20 via-white to-white pointer-events-none" />
 
@@ -73,18 +76,30 @@ export default function Pricing() {
         </h2>
 
         <p className="text-muted-foreground mt-4 text-lg max-w-xl mx-auto">
-          Planos flexíveis e acessíveis. Escolha o ideal para sua jornada.
+          Escolha o plano ideal para você
         </p>
 
         {/* SELETOR */}
         <div className="flex items-center justify-center gap-4 mt-8">
-          <span className={!showAnnual ? "font-semibold text-gray-900" : "text-muted-foreground"}>
+          <span
+            className={
+              !showAnnual
+                ? "font-semibold text-gray-900"
+                : "text-muted-foreground"
+            }
+          >
             Mensal
           </span>
 
           <Switch checked={showAnnual} onCheckedChange={setShowAnnual} />
 
-          <span className={showAnnual ? "font-semibold text-gray-900" : "text-muted-foreground"}>
+          <span
+            className={
+              showAnnual
+                ? "font-semibold text-gray-900"
+                : "text-muted-foreground"
+            }
+          >
             Anual
           </span>
 
@@ -121,7 +136,6 @@ export default function Pricing() {
           `}
           style={{ animation: "float 4s ease-in-out infinite" }}
         >
-
           {/* SELO MAIS VENDIDO */}
           {showAnnual && (
             <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -137,11 +151,19 @@ export default function Pricing() {
           )}
 
           {/* Nome + preço */}
-          <h3 className={`text-3xl font-bold ${showAnnual ? "text-white" : "text-gray-900"}`}>
+          <h3
+            className={`text-3xl font-bold ${
+              showAnnual ? "text-white" : "text-gray-900"
+            }`}
+          >
             {activeTier.name}
           </h3>
 
-          <p className={`mt-3 text-lg ${showAnnual ? "text-purple-100" : "text-gray-600"}`}>
+          <p
+            className={`mt-3 text-lg ${
+              showAnnual ? "text-purple-100" : "text-gray-600"
+            }`}
+          >
             {activeTier.description}
           </p>
 
@@ -200,7 +222,8 @@ export default function Pricing() {
         </p>
 
         <p className="text-base mt-2 text-green-800/80">
-          Experimente sem risco. Caso não goste, devolvemos 100% do seu investimento.
+          Experimente sem risco. Caso não goste, devolvemos 100% do seu
+          investimento.
         </p>
       </motion.div>
 

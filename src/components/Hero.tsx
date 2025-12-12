@@ -7,6 +7,15 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
   return (
     <section className="relative overflow-hidden pt-24 pb-32 bg-gradient-to-b from-white via-purple-50/40 to-white">
+
+      {/* BOTÃO HOME FIXO */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed top-4 left-4 z-[999] bg-white/80 backdrop-blur-md border border-purple-200 shadow-lg px-3 py-2 rounded-xl flex items-center gap-2 transition hover:scale-105"
+      >
+        <img src={lucyLogo} className="h-6 w-auto" />
+      </button>
+
       {/* Blobs animados */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -21,9 +30,9 @@ const Hero = () => {
         className="absolute bottom-0 right-0 w-[380px] h-[380px] bg-pink-300/30 rounded-full blur-[120px]"
       />
 
-      <div className="container mx-auto px-6 max-w-7xl grid lg:grid-cols-2 gap-20 items-center">
+      <div className="container mx-auto px-6 max-w-7xl grid lg:grid-cols-2 gap-20 items-center relative z-10">
         
-        {/* LEFT SIDE */}
+        {/* LADO ESQUERDO */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,29 +44,25 @@ const Hero = () => {
             Experiência premium em alimentação e treinos
           </div>
 
-          {/* TITLE */}
+          {/* TÍTULO */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 tracking-tight">
-            A forma mais simples de organizar sua alimentação, treinos e evolução é com a{" "}
-            <span
-              className="
-                inline-flex items-center gap-4 px-6 py-3 rounded-2xl
-                bg-purple-100/80 shadow-md backdrop-blur-sm
-              "
-            >
+            A forma mais simples de organizar sua alimentação, treinos e
+            evolução é com a{" "}
+            <span className="inline-flex items-center gap-3 px-3 py-1 rounded-2xl bg-purple-100/80 shadow-md backdrop-blur-sm">
               <img
                 src={lucyLogo}
                 alt="LucyFit"
-                className="h-20 md:h-24 w-auto drop-shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+                className="h-8 md:h-10 w-auto drop-shadow-[0_3px_6px_rgba(0,0,0,0.25)]"
               />
             </span>
           </h1>
 
           <p className="text-lg text-gray-600 max-w-xl leading-relaxed">
-            Monitore seus treinos, acompanhe a sua alimentação e alcance seus objetivos com
+            Monitore treinos, acompanhe alimentação e alcance seus objetivos com
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* CTAS */}
+          {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
               size="lg"
@@ -65,69 +70,60 @@ const Hero = () => {
               asChild
             >
               <a href="#pricing">
-                Começar agora
+                Assinar agora
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 px-8 text-base border-gray-300"
-              asChild
-            >
-              <a href="#how-it-works">Ver como funciona</a>
-            </Button>
           </div>
 
-          {/* UPDATED STATISTICS */}
-          <div className="flex flex-wrap items-center gap-6 pt-2 text-sm text-gray-600">
-
-            <div>
+          {/* MÉTRICAS PREMIUM */}
+          <div className="mt-6 grid grid-cols-3 gap-4 max-w-sm">
+            
+            <div className="flex flex-col">
               <span className="text-xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                 +2.000
               </span>
-              <span className="ml-1">pessoas já usaram a LucyFit</span>
+              <span className="text-xs text-gray-500 -mt-1">
+                pessoas já usaram
+              </span>
             </div>
 
-            <span className="hidden sm:block h-4 w-px bg-gray-300" />
-
-            <div>
+            <div className="flex flex-col">
               <span className="text-xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                 +50 mil
               </span>
-              <span className="ml-1">usuários ativos</span>
+              <span className="text-xs text-gray-500 -mt-1">
+                usuários ativos
+              </span>
             </div>
 
-            <span className="hidden sm:block h-4 w-px bg-gray-300" />
-
-            <div>
+            <div className="flex flex-col">
               <span className="text-xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                 +200kg
               </span>
-              <span className="ml-1">eliminados</span>
+              <span className="text-xs text-gray-500 -mt-1">
+                eliminados
+              </span>
             </div>
 
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE — WhatsApp Preview Card */}
+        {/* LADO DIREITO – CARD DA IA */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9 }}
           className="relative flex justify-center"
         >
-          {/* Glow */}
-          <div className="absolute inset-0 w-[360px] h-[360px] bg-purple-300/30 blur-[100px] rounded-full" />
+          <div className="absolute inset-0 w-[520px] h-[520px] bg-purple-300/40 blur-[110px] rounded-full" />
 
-          {/* CARD */}
-          <div className="relative rounded-3xl backdrop-blur-xl bg-white/70 border border-white/40 shadow-2xl overflow-hidden max-w-sm">
+          <div className="relative rounded-3xl backdrop-blur-xl bg-white/80 border border-white/60 shadow-2xl overflow-hidden max-w-md md:max-w-xl">
             
-            {/* Card Header */}
-            <div className="px-4 py-3 flex items-center justify-between bg-white/60 border-b border-white/30">
+            {/* Header */}
+            <div className="px-4 py-3 flex items-center justify-between bg-white/80 border-b border-white/50">
               <div className="flex items-center gap-2">
-                <img src={lucyLogo} className="h-7 w-7 rounded-full" />
+                <img src={lucyLogo} className="h-8 w-8 rounded-full" />
                 <div>
                   <p className="text-xs font-semibold">LucyFit • Assistente IA</p>
                   <p className="text-[10px] text-gray-500">Conversa ativa no WhatsApp</p>
@@ -136,15 +132,15 @@ const Hero = () => {
               <span className="text-[10px] text-gray-500">em tempo real</span>
             </div>
 
-            {/* WhatsApp GIF */}
+            {/* GIF OU VÍDEO */}
             <img
               src={heroGif}
               alt="LucyFit conversando no WhatsApp"
-              className="w-full object-cover"
+              className="w-full object-cover max-h-[580px]"
+              loading="lazy"
             />
           </div>
         </motion.div>
-
       </div>
     </section>
   );

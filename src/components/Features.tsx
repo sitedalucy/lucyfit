@@ -1,154 +1,174 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Camera, Mic, BarChart3 } from "lucide-react";
+// src/components/Features.tsx
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-import chatGif from "@/assets/gifs/chat-typing.gif";
-import voiceGif from "@/assets/gifs/hero-chat.gif";
-import controlGif from "@/assets/gifs/meal-animation.gif";
+// GIFs CORRETOS (como você informou)
+import chatTyping from "@/assets/gifs/chat-typing.gif";
+import heroChat from "@/assets/gifs/hero-chat.gif";
+import mealAnimation from "@/assets/gifs/meal-animation.gif";
 
 const features = [
   {
-    icon: Camera,
+    id: 0,
     title: "Capture sua refeição e deixe a I.A fazer o resto.",
-    description:
-      "Envie uma foto e receba análise automática de calorias, nutrientes e sugestões de melhoria. Simples, rápido e preciso.",
-    media: chatGif,
+    text: "Envie uma foto e receba análise automática de calorias, nutrientes e sugestões de melhoria. Simples, rápido e preciso.",
+    gif: chatTyping,
   },
   {
-    icon: Mic,
+    id: 1,
     title: "Fale com sua I.A como se fosse um nutricionista.",
-    description:
-      "Descreva seu prato por voz ou mensagem e receba a análise completa instantaneamente.",
-    media: voiceGif,
+    text: "Descreva seu prato por voz ou mensagem e receba a análise completa instantaneamente.",
+    gif: heroChat,
   },
   {
-    icon: BarChart3,
+    id: 2,
     title: "Controle total, sem esforço.",
-    description:
-      "Acompanhe em tempo real quanto pode comer no dia, baseado nas suas metas e no seu histórico.",
-    media: controlGif,
+    text: "Acompanhe em tempo real quanto pode comer no dia, baseado nas suas metas e no seu histórico.",
+    gif: mealAnimation,
   },
 ];
 
-export default function Features() {
-  const [active, setActive] = useState(0);
+/* ------------------------------------------------------------------ */
+/* CARD INDIVIDUAL                                                     */
+/* ------------------------------------------------------------------ */
+function FeatureCard({
+  item,
+  index,
+  activeIndex,
+  setActiveIndex,
+}: {
+  item: (typeof features)[0];
+  index: number;
+  activeIndex: number;
+  setActiveIndex: (i: number) => void;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // alternância automática
+  const isInView = useInView(ref, {
+    margin: "-35% 0px -35% 0px",
+  });
+
   useEffect(() => {
-    const id = setInterval(() => {
-      setActive((prev) => (prev + 1) % features.length);
-    }, 5000);
-    return () => clearInterval(id);
-  }, []);
+    // Quando entra em view, espera um tempo antes de ativar
+    if (isInView) {
+      timeoutRef.current = setTimeout(() => {
+        setActiveIndex(index);
+      }, 500); // ⏱️ delay controlado (ajuste fino)
+    }
+
+    // Se sair da view antes do tempo, cancela
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [isInView, index, setActiveIndex]);
+
+  const isActive = activeIndex === index;
 
   return (
-    <section id="how-it-works" className="relative py-28 bg-white overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-purple-100/40 via-white to-purple-100/30" />
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className={`
+        relative overflow-hidden rounded-2xl p-6 border transition-all
+        ${
+          isActive
+            ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-[0_18px_45px_rgba(88,28,135,0.18)]"
+            : "bg-white border-purple-100 shadow-[0_10px_30px_rgba(88,28,135,0.08)]"
+        }
+      `}
+    >
+      <h3 className="text-xl font-semibold mb-2 text-gray-900">
+        {item.title}
+      </h3>
 
-      <div className="relative container mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-20 items-center">
+      <p className="text-gray-600 text-sm leading-relaxed">
+        {item.text}
+      </p>
 
-        {/* LEFT SIDE */}
-        <div className="space-y-8">
+      {/* MOBILE — GIF JUNTO DO CARD */}
+      <div className="lg:hidden mt-5 rounded-xl overflow-hidden shadow">
+        <img
+          src={item.gif}
+          alt={item.title}
+          className="w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      {/* BARRA — SOMENTE NO CARD ATIVO */}
+      {isActive && (
+        <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-3"
-          >
-            <p className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-1 text-xs font-semibold tracking-[0.18em] text-purple-700 uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
-              COMO A LUCY AJUDA
-            </p>
-
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
-              Funcionalidades que realmente importam.
-            </h2>
-            <p className="text-gray-600 max-w-lg">
-              Com a LucyFit, você tem as funcionalidades essenciais e sem complicação.
-            </p>
-          </motion.div>
-
-          <div className="space-y-4">
-            {features.map((item, index) => {
-              const isActive = active === index;
-              return (
-                <motion.div
-                  key={index}
-                  onMouseEnter={() => setActive(index)}
-                  onClick={() => setActive(index)}
-                  initial={{ opacity: 0, x: -15 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: index * 0.1 }}
-                  className={`
-                    rounded-2xl border bg-white/90 p-6 cursor-pointer transition-all
-                    hover:shadow-xl hover:-translate-y-1
-                    ${isActive ? "border-purple-500 shadow-purple-200/70" : "border-gray-200 shadow-md"}
-                  `}
-                >
-                  <div className="flex items-start gap-4">
-                    <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                        isActive ? "bg-purple-600" : "bg-purple-100"
-                      }`}
-                    >
-                      <item.icon
-                        className={`w-6 h-6 ${
-                          isActive ? "text-white" : "text-purple-600"
-                        }`}
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-
-                  {/* 🎚️ Barra de carregamento premium */}
-                  {isActive && (
-                    <div className="mt-4 h-[3px] bg-purple-200 rounded-full overflow-hidden">
-                      <div className="h-full w-full bg-purple-600 animate-[loadbar_5s_linear_infinite]" />
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
+            className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 3, ease: "linear" }} // ⏱️ duração visual
+          />
         </div>
+      )}
+    </motion.div>
+  );
+}
 
-        {/* RIGHT SIDE — viewer */}
-        <motion.div
-          key={active}
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+/* ------------------------------------------------------------------ */
+/* COMPONENTE PRINCIPAL                                                */
+/* ------------------------------------------------------------------ */
+export default function Features() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <section id="features" className="py-32 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl">
+
+        {/* TÍTULO */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative flex justify-center"
+          className="text-4xl md:text-5xl font-bold text-center mb-20"
         >
-          <div className="absolute -top-16 -left-12 w-[360px] h-[360px] bg-purple-300/35 blur-[120px] rounded-full" />
-          <div className="absolute -bottom-16 -right-12 w-[320px] h-[320px] bg-pink-300/30 blur-[110px] rounded-full" />
+          Como a Lucy te ajuda todos os dias
+        </motion.h2>
 
-          <div className="relative w-[360px] rounded-3xl overflow-hidden shadow-2xl border border-white/60 backdrop-blur-xl bg-white/70">
-            <img
-              src={features[active].media}
-              alt={features[active].title}
-              className="w-full object-cover"
-            />
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+
+          {/* CARDS */}
+          <div className="space-y-10">
+            {features.map((item, index) => (
+              <FeatureCard
+                key={item.id}
+                item={item}
+                index={index}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            ))}
           </div>
-        </motion.div>
+
+          {/* GIF GRANDE — DESKTOP */}
+          <div className="hidden lg:block sticky top-32">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-200 bg-purple-50/40 backdrop-blur-xl">
+              <motion.img
+                key={activeIndex}
+                src={features[activeIndex].gif}
+                alt="LucyFit em ação"
+                className="w-full object-cover max-h-[650px]"
+                initial={{ opacity: 0.4 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );
 }
-
-/* ANIMAÇÃO DA BARRA */
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes loadbar {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(0%); }
-}
-`;
-document.head.appendChild(style);

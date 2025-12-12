@@ -5,10 +5,8 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-white to-purple-50 pt-20 pb-12 mt-20 border-t border-purple-100/40">
       <div className="container mx-auto px-6 max-w-7xl">
-
         {/* TOP GRID */}
         <div className="grid md:grid-cols-4 gap-12 mb-16">
-          
           {/* LOGO + DESCRIPTION */}
           <div>
             <img
@@ -17,7 +15,7 @@ export default function Footer() {
               className="h-12 mb-4 drop-shadow-sm"
             />
             <p className="text-gray-600 text-sm leading-relaxed max-w-xs">
-              Organize sua alimentação e treinos com inteligência artificial — 
+              Organize sua alimentação e treinos com inteligência artificial —{" "}
               simples, rápido e direto no WhatsApp.
             </p>
           </div>
@@ -29,9 +27,24 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-2 text-gray-600 text-sm">
-              <li><a href="#features" className="hover:text-purple-600 transition">Funcionalidades</a></li>
-              <li><a href="#pricing" className="hover:text-purple-600 transition">Preços</a></li>
-              <li><a href="#testimonials" className="hover:text-purple-600 transition">Depoimentos</a></li>
+              <li>
+                <a href="#features" className="hover:text-purple-600 transition">
+                  Funcionalidades
+                </a>
+              </li>
+              <li>
+                <a href="#pricing" className="hover:text-purple-600 transition">
+                  Preços
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  className="hover:text-purple-600 transition"
+                >
+                  Depoimentos
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -42,14 +55,24 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-2 text-gray-600 text-sm">
-              <li><a href="/sobre" className="hover:text-purple-600 transition">Sobre</a></li>
+              <li>
+                <a href="/sobre" className="hover:text-purple-600 transition">
+                  Sobre
+                </a>
+              </li>
               <li className="flex items-center gap-2 hover:text-purple-600 transition">
                 <Instagram className="h-4 w-4" />
-                <a href="https://www.instagram.com/lucyfit.ia/" target="_blank">Instagram</a>
+                <a
+                  href="https://www.instagram.com/lucyfit.ia/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Instagram
+                </a>
               </li>
               <li>
-                <a 
-                  href="mailto:atendimento@lucyfit.com.br" 
+                <a
+                  href="mailto:atendimento@lucyfit.com.br"
                   className="hover:text-purple-600 transition"
                 >
                   Contato
@@ -66,16 +89,16 @@ export default function Footer() {
 
             <ul className="space-y-2 text-gray-600 text-sm">
               <li>
-                <a 
-                  href="/politica-de-privacidade" 
+                <a
+                  href="/politica-de-privacidade"
                   className="hover:text-purple-600 transition"
                 >
                   Política de Privacidade
                 </a>
               </li>
               <li>
-                <a 
-                  href="/termos-de-uso" 
+                <a
+                  href="/termos-de-uso"
                   className="hover:text-purple-600 transition"
                 >
                   Termos de Uso
@@ -83,11 +106,18 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
 
+        {/* ADDRESS */}
+        <div className="border-t border-purple-100 pt-4 pb-4 mb-4 text-sm text-gray-500">
+          <p>
+            Av. Queiroz Filho, 1700 - Alto de Pinheiros, São Paulo - SP,
+            05319-000
+          </p>
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="border-t border-purple-100 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
           <p>© 2025 LucyFit. Todos os direitos reservados.</p>
 
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
@@ -99,7 +129,6 @@ export default function Footer() {
             </span>
           </div>
         </div>
-
       </div>
     </footer>
   );

@@ -14,12 +14,14 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Mesma estrutura de funcionalidades do outro dev,
+// mantendo nossa pegada visual premium.
 const features = [
   {
     icon: Calendar,
     title: "Registro automático diário",
     description:
-      "Registre suas refeições enviando foto, texto ou áudio. A Lucy Fit organiza tudo automaticamente no WhatsApp.",
+      "Registre suas refeições enviando foto, texto ou áudio. A Lucy organiza tudo automaticamente no WhatsApp.",
   },
   {
     icon: History,
@@ -92,11 +94,11 @@ const features = [
 export default function MoreFeatures() {
   return (
     <section
-      className="py-28 bg-gradient-to-b from-white via-purple-50/30 to-white"
       id="features"
+      className="py-28 bg-gradient-to-b from-white via-purple-50/20 to-white"
     >
       <div className="container mx-auto max-w-7xl px-6">
-        {/* TÍTULO MAIS VIVO */}
+        {/* TÍTULO */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,23 +106,14 @@ export default function MoreFeatures() {
           transition={{ duration: 0.6 }}
           className="text-center space-y-4 mb-16"
         >
-          <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
-            <span className="text-xs font-semibold tracking-[0.24em] text-purple-700 uppercase">
-              Ainda mais funções
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-            Ainda mais funções para facilitar{" "}
-            <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              sua vida.
-            </span>
+          <p className="text-xs font-semibold tracking-[0.25em] text-purple-600 uppercase">
+            Ainda mais funções
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+            Ainda mais funções para facilitar sua vida.
           </h2>
-
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            I.A projetada para quem quer simplicidade, velocidade e resultados
-            reais — com tudo organizado em um único lugar.
+            I.A projetada para quem quer simplicidade, velocidade e resultados reais.
           </p>
         </motion.div>
 
@@ -129,21 +122,30 @@ export default function MoreFeatures() {
           {features.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="p-6 rounded-2xl bg-white shadow-lg hover:shadow-2xl border border-gray-200/80 transition-all group cursor-default"
+              transition={{ duration: 0.35, delay: index * 0.04 }}
+              className="relative p-6 rounded-2xl bg-white/90 shadow-[0_10px_35px_rgba(15,23,42,0.06)] 
+                         border border-purple-100/70 hover:border-purple-300/80 
+                         hover:shadow-[0_18px_45px_rgba(88,28,135,0.18)]
+                         transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-purple-600 transition-all">
-                <item.icon className="w-6 h-6 text-purple-600 group-hover:text-white" />
+              {/* Glow suave ao passar o mouse (desktop apenas) */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-50 via-white to-pink-50" />
+
+              <div className="relative flex flex-col h-full">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-md">
+                  <item.icon className="w-5 h-5 text-white" />
+                </div>
+
+                <h3 className="font-semibold text-lg mb-2 text-gray-900">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-gray-900">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {item.description}
-              </p>
             </motion.div>
           ))}
         </div>

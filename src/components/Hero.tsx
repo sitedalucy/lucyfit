@@ -62,14 +62,14 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE — VÍDEO */}
+          {/* MOBILE — VÍDEO AUTOPLAY */}
           <div className="lg:hidden pt-4">
             <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
               <video
                 src={heroVideo}
                 autoPlay
-                loop
                 muted
+                loop
                 playsInline
                 preload="metadata"
                 className="w-full object-cover"
@@ -104,7 +104,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* DESKTOP — VÍDEO MAIOR */}
+        {/* DESKTOP — VÍDEO AUTOPLAY */}
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -115,8 +115,8 @@ const Hero = () => {
             <video
               src={heroVideo}
               autoPlay
-              loop
               muted
+              loop
               playsInline
               preload="metadata"
               className="w-full object-cover"

@@ -44,8 +44,8 @@ function MediaRenderer({
       <video
         src={src}
         autoPlay
-        loop
         muted
+        loop
         playsInline
         preload="metadata"
         className={className}

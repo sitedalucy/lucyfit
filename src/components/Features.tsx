@@ -133,7 +133,7 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-20"
         >
-          Como a Lucy te ajuda todos os dias
+          Como a LucyFit te ajuda todos os dias
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-20 items-start">

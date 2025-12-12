@@ -43,15 +43,23 @@ function FeatureCard({
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
 
+  // ✅ Hook SEMPRE chamado (regra do React respeitada)
   const isInView = useInView(ref, {
     margin: "-30% 0px -30% 0px",
   });
 
   useEffect(() => {
+    if (isMobile) {
+      // 🚀 Mobile: comportamento direto, sem observer
+      setActiveIndex(index);
+      return;
+    }
+
+    // Desktop: reage ao scroll normalmente
     if (isInView) {
       setActiveIndex(index);
     }
-  }, [isInView, index, setActiveIndex]);
+  }, [isInView, isMobile, index, setActiveIndex]);
 
   const isActive = activeIndex === index;
 
@@ -88,7 +96,7 @@ function FeatureCard({
         />
       </div>
 
-      {/* BARRA — SOMENTE CARD ATIVO */}
+      {/* BARRA — SOMENTE NO CARD ATIVO */}
       {isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
           <motion.div
@@ -121,6 +129,7 @@ export default function Features() {
 
         <div className="grid lg:grid-cols-2 gap-20 items-start">
 
+          {/* CARDS */}
           <div className="space-y-10">
             {features.map((item, index) => (
               <FeatureCard

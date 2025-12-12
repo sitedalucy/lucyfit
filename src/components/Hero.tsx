@@ -19,7 +19,7 @@ const Hero = () => {
         <img src={lucyLogo} className="h-6 w-auto" alt="LucyFit" />
       </button>
 
-      {/* Blobs */}
+      {/* Blobs decorativos */}
       <motion.div
         initial={reduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 0.55 }}
@@ -62,7 +62,7 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE — GIF */}
+          {/* MOBILE — GIF (inalterado) */}
           <div className="lg:hidden pt-4">
             <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
               <img
@@ -71,7 +71,6 @@ const Hero = () => {
                 className="w-full object-cover bg-white"
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
               />
             </div>
           </div>
@@ -86,7 +85,7 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* MÉTRICAS — MOBILE + WEB */}
+          {/* MÉTRICAS */}
           <div className="flex justify-center lg:justify-start gap-8 pt-6 text-sm text-gray-600">
             <div className="text-center">
               <strong className="block text-purple-600 text-lg">+2.000</strong>
@@ -103,21 +102,21 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* DESKTOP — GIF GRANDE */}
+        {/* DESKTOP — GIF MAIOR */}
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="hidden lg:flex justify-center"
         >
-          <div className="rounded-3xl bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-md">
+          <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden
+                          max-w-xl lg:max-w-2xl">
             <img
               src={heroGif}
               alt="LucyFit conversando no WhatsApp"
               className="w-full object-cover bg-white"
               loading="eager"
               decoding="async"
-              fetchPriority="high"
             />
           </div>
         </motion.div>

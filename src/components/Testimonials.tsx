@@ -69,7 +69,7 @@ export default function Testimonials() {
             "
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Não acredite só em nós — veja quem já usa.
+              Não acredite somente em nós — veja quem já usa.
             </h2>
 
             <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">

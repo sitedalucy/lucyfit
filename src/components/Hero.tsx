@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import heroGif from "@/assets/gifs/meal-animation.gif";
+import heroGif from "@/assets/gifs/meal-animation.mp4";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
 

@@ -1,9 +1,7 @@
-// src/components/Features.tsx
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// GIFs corretos
 import chatTyping from "@/assets/gifs/chat-typing.gif";
 import heroChat from "@/assets/gifs/hero-chat.gif";
 import mealAnimation from "@/assets/gifs/meal-animation.gif";
@@ -43,19 +41,18 @@ function FeatureCard({
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
 
-  // ✅ Hook SEMPRE chamado (regra do React respeitada)
+  // ⛔ Observer só no desktop
   const isInView = useInView(ref, {
     margin: "-30% 0px -30% 0px",
+    once: true,
   });
 
   useEffect(() => {
     if (isMobile) {
-      // 🚀 Mobile: comportamento direto, sem observer
+      // Mobile = índice fixo (sem scroll listener)
       setActiveIndex(index);
       return;
     }
-
-    // Desktop: reage ao scroll normalmente
     if (isInView) {
       setActiveIndex(index);
     }
@@ -66,15 +63,13 @@ function FeatureCard({
   return (
     <motion.div
       ref={ref}
-      initial={isMobile ? false : { opacity: 0, x: -24 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: isMobile ? 0 : 0.6 }}
-      className={`
-        relative overflow-hidden rounded-2xl p-6 border transition-all
+      initial={false}
+      animate={{ opacity: 1 }}
+      className={`relative overflow-hidden rounded-2xl p-6 border
         ${
           isActive
-            ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-[0_18px_45px_rgba(88,28,135,0.18)]"
-            : "bg-white border-purple-100 shadow-[0_10px_30px_rgba(88,28,135,0.08)]"
+            ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-lg"
+            : "bg-white border-purple-100 shadow-md"
         }
       `}
     >
@@ -86,21 +81,22 @@ function FeatureCard({
         {item.text}
       </p>
 
-      {/* MOBILE — GIF JUNTO */}
+      {/* MOBILE — GIF SEM ANIMAÇÃO */}
       <div className="lg:hidden mt-5 rounded-xl overflow-hidden shadow">
         <img
           src={item.gif}
           alt={item.title}
           className="w-full object-cover"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
-      {/* BARRA — SOMENTE NO CARD ATIVO */}
-      {isActive && (
+      {/* BARRA SOMENTE DESKTOP */}
+      {!isMobile && isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+            className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 3, ease: "linear" }}
@@ -115,21 +111,13 @@ export default function Features() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="features" className="py-32 bg-white relative overflow-hidden">
+    <section id="features" className="py-32 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-20"
-        >
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-20">
           Como a LucyFit te ajuda todos os dias
-        </motion.h2>
+        </h2>
 
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-
-          {/* CARDS */}
           <div className="space-y-10">
             {features.map((item, index) => (
               <FeatureCard
@@ -144,20 +132,17 @@ export default function Features() {
 
           {/* DESKTOP — GIF GRANDE */}
           <div className="hidden lg:block sticky top-32">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-200 bg-purple-50/40 backdrop-blur-xl">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border bg-purple-50/40">
               <motion.img
                 key={activeIndex}
                 src={features[activeIndex].gif}
                 alt="LucyFit em ação"
                 className="w-full object-cover max-h-[650px]"
-                initial={{ opacity: 0.4 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
-
         </div>
       </div>
     </section>

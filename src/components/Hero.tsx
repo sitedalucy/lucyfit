@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import heroGif from "@/assets/gifs/meal-animation.mp4";
+import heroVideo from "@/assets/gifs/meal-animation.mp4";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
 
@@ -62,15 +62,17 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE — GIF (inalterado) */}
+          {/* MOBILE — VÍDEO */}
           <div className="lg:hidden pt-4">
             <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
-              <img
-                src={heroGif}
-                alt="LucyFit conversando no WhatsApp"
-                className="w-full object-cover bg-white"
-                loading="eager"
-                decoding="async"
+              <video
+                src={heroVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full object-cover"
               />
             </div>
           </div>
@@ -102,21 +104,22 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* DESKTOP — GIF MAIOR */}
+        {/* DESKTOP — VÍDEO MAIOR */}
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="hidden lg:flex justify-center"
         >
-          <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden
-                          max-w-xl lg:max-w-2xl">
-            <img
-              src={heroGif}
-              alt="LucyFit conversando no WhatsApp"
-              className="w-full object-cover bg-white"
-              loading="eager"
-              decoding="async"
+          <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-xl lg:max-w-2xl">
+            <video
+              src={heroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              className="w-full object-cover"
             />
           </div>
         </motion.div>

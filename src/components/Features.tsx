@@ -75,7 +75,7 @@ function FeatureCard({
     <div
       ref={ref}
       onMouseEnter={() => !isMobile && setActiveIndex(index)}
-      className={`cursor-pointer relative overflow-hidden rounded-2xl p-6 border transition-all ${
+      className={`relative overflow-hidden rounded-2xl p-6 border transition-all ${
         isActive
           ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-xl"
           : "bg-white border-purple-100 shadow-md"
@@ -95,7 +95,7 @@ function FeatureCard({
 
       {!isMobile && isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 w-full" />
+          <div className="h-full w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500" />
         </div>
       )}
     </div>
@@ -104,17 +104,26 @@ function FeatureCard({
 
 export default function Features() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = useIsMobile();
   const motionCfg = useMotionConfig();
 
   return (
     <section id="features" className="py-32 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
-        <motion.h2
-          {...motionCfg}
-          className="text-4xl md:text-5xl font-bold text-center mb-20"
-        >
-          Como a LucyFit te ajuda todos os dias
-        </motion.h2>
+
+        {/* 🔥 TÍTULO — SEMPRE VISÍVEL */}
+        {isMobile ? (
+          <h2 className="text-4xl font-bold text-center mb-20">
+            Como a LucyFit te ajuda todos os dias
+          </h2>
+        ) : (
+          <motion.h2
+            {...motionCfg}
+            className="text-4xl md:text-5xl font-bold text-center mb-20"
+          >
+            Como a LucyFit te ajuda todos os dias
+          </motion.h2>
+        )}
 
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="space-y-10">

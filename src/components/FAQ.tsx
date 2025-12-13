@@ -6,9 +6,11 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { useMotionConfig } from "@/lib/motion-config";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function FAQ() {
   const motionCfg = useMotionConfig();
+  const isMobile = useIsMobile();
 
   const faqs = [
     {
@@ -44,23 +46,41 @@ export default function FAQ() {
       className="py-28 bg-gradient-to-b from-white via-purple-50/20 to-white"
     >
       <div className="container mx-auto px-6 max-w-4xl">
-        {/* HEADER */}
-        <motion.div {...motionCfg} className="text-center mb-14 space-y-4">
-          <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
-            <span className="text-xs tracking-[0.25em] text-purple-700 font-semibold uppercase">
-              Dúvidas frequentes
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+
+        {/* 🔥 HEADER — SEMPRE VISÍVEL */}
+        {isMobile ? (
+          <div className="text-center mb-14 space-y-4">
+            <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
+              <span className="text-xs tracking-[0.25em] text-purple-700 font-semibold uppercase">
+                Dúvidas frequentes
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+            </div>
+
+            <h2 className="text-3xl font-bold">Perguntas frequentes</h2>
+
+            <p className="text-gray-600 max-w-xl mx-auto">
+              Tudo o que você precisa saber antes de começar a usar a LucyFit.
+            </p>
           </div>
+        ) : (
+          <motion.div {...motionCfg} className="text-center mb-14 space-y-4">
+            <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
+              <span className="text-xs tracking-[0.25em] text-purple-700 font-semibold uppercase">
+                Dúvidas frequentes
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+            </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Perguntas frequentes
-          </h2>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              Perguntas frequentes
+            </h2>
 
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Tudo o que você precisa saber antes de começar a usar a LucyFit.
-          </p>
-        </motion.div>
+            <p className="text-gray-600 max-w-xl mx-auto">
+              Tudo o que você precisa saber antes de começar a usar a LucyFit.
+            </p>
+          </motion.div>
+        )}
 
         {/* ACCORDION */}
         <Accordion type="single" collapsible className="space-y-5">

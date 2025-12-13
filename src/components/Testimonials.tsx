@@ -1,3 +1,4 @@
+// src/components/Testimonials.tsx
 import { motion } from "framer-motion";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -8,42 +9,66 @@ export default function Testimonials() {
   const testimonials = [
     {
       text: "Perdi 12kg em 3 meses! A I.A me ajudou a entender minha alimentação de verdade.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
       name: "Mariana Silva",
       role: "Perdeu 12kg",
     },
     {
       text: "Muito mais prático que qualquer app que já usei. Só tirar foto e pronto!",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop",
       name: "Carlos Eduardo",
       role: "Usuário há 6 meses",
     },
     {
       text: "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop",
       name: "Ana Paula",
       role: "Nutricionista",
     },
     {
       text: "Mudou completamente minha relação com a comida.",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop",
       name: "Julia Oliveira",
       role: "Usuária há 1 ano",
     },
     {
       text: "O melhor investimento que fiz na minha saúde.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop",
       name: "Rafael Santos",
       role: "Perdeu 8kg",
     },
     {
       text: "A I.A entende tudo, até quando mando áudio.",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop",
       name: "Beatriz Lima",
       role: "Perdeu 15kg",
     },
+    {
+      text: "Nunca consegui manter constância com dieta. Com a LucyFit ficou simples, é só mandar mensagem no WhatsApp.",
+      image:
+        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop",
+      name: "Lucas Almeida",
+      role: "Usuário há 4 meses",
+    },
+    {
+      text: "Mais do que emagrecer, aprendi a comer melhor. A LucyFit me fez prestar atenção no que eu realmente consumo.",
+      image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2d?w=120&h=120&fit=crop",
+      name: "Patrícia Rocha",
+      role: "Mudou hábitos alimentares",
+    },
   ];
 
+  // 📱 Mobile: 5 depoimentos em UMA coluna (leve + rico)
+  const mobileTestimonials = testimonials.slice(0, 5);
+
+  // 🖥 Desktop: 3 colunas
   const firstColumn = testimonials.slice(0, 2);
   const secondColumn = testimonials.slice(2, 4);
   const thirdColumn = testimonials.slice(4, 6);
@@ -84,10 +109,11 @@ export default function Testimonials() {
             }
           `}
         >
-          <TestimonialsColumn testimonials={firstColumn} duration={16} />
-
-          {!isMobile && (
+          {isMobile ? (
+            <TestimonialsColumn testimonials={mobileTestimonials} duration={18} />
+          ) : (
             <>
+              <TestimonialsColumn testimonials={firstColumn} duration={16} />
               <TestimonialsColumn testimonials={secondColumn} duration={20} />
               <TestimonialsColumn testimonials={thirdColumn} duration={18} />
             </>

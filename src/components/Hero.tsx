@@ -1,6 +1,7 @@
 // src/components/Hero.tsx
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import heroGif from "@/assets/gifs/meal-animation.gif";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
@@ -10,12 +11,28 @@ const Hero = () => {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
+  // 🔹 Controla quando o GIF aparece no mobile (performance)
+  const [showGif, setShowGif] = useState<boolean>(!isMobile);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const timeoutId = setTimeout(() => {
+      setShowGif(true);
+    }, 1200);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isMobile]);
+
   return (
     <section className="relative overflow-hidden pt-24 pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
       {/* MOBILE HOME BUTTON */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="lg:hidden fixed top-4 left-4 z-[999] bg-white/90 backdrop-blur-md border border-purple-200 shadow-md px-3 py-2 rounded-xl"
+        aria-label="Voltar para o topo"
       >
         <img src={lucyLogo} className="h-6 w-auto" alt="LucyFit" />
       </button>
@@ -59,18 +76,20 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE GIF */}
-          <div className="lg:hidden pt-4">
-            <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
-              <img
-                src={heroGif}
-                alt="LucyFit conversando no WhatsApp"
-                loading="eager"
-                decoding="async"
-                className="w-full object-cover"
-              />
+          {/* MOBILE GIF — carregamento atrasado */}
+          {isMobile && showGif && (
+            <div className="pt-4">
+              <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
+                <img
+                  src={heroGif}
+                  alt="LucyFit conversando no WhatsApp"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full object-cover"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* CTA */}
           <div className="flex justify-center lg:justify-start pt-4">
@@ -82,7 +101,7 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* MÉTRICAS — RESTAURADAS */}
+          {/* MÉTRICAS */}
           <div className="flex justify-center lg:justify-start gap-8 pt-6 text-sm text-gray-600">
             <div className="text-center">
               <strong className="block text-purple-600 text-lg">+2.000</strong>

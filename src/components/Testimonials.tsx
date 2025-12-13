@@ -45,21 +45,32 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden">
-      <div className="container mx-auto max-w-7xl px-6">
-        {!isMobile && (
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl font-bold">Não acredite somente em nós</h2>
-          </motion.div>
-        )}
+    <section
+      id="testimonials"
+      className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
+    >
+      <div className="container mx-auto max-w-7xl px-6 relative">
+        {/* TÍTULO — SEMPRE VISÍVEL */}
+        <motion.div
+          initial={isMobile ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative flex justify-center mb-[-160px] z-10"
+        >
+          <div className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Não acredite somente em nós — veja quem já usa.
+            </h2>
 
-        <div className="flex justify-center gap-6 max-h-[520px] overflow-hidden">
+            <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
+              Junte-se a milhares de pessoas que transformaram sua alimentação.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* CARROSSEL */}
+        <div className="relative z-20 flex justify-center gap-6 max-h-[520px] overflow-hidden">
           <TestimonialsColumn testimonials={testimonials.slice(0, 2)} duration={16} />
           {!isMobile && (
             <TestimonialsColumn testimonials={testimonials.slice(2, 4)} duration={20} />

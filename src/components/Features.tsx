@@ -95,10 +95,7 @@ function FeatureCard({
 
       {!isMobile && isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"
-            style={{ width: "100%" }}
-          />
+          <div className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 w-full" />
         </div>
       )}
     </div>

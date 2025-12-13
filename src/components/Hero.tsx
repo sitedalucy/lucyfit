@@ -1,3 +1,4 @@
+// src/components/Hero.tsx
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import heroGif from "@/assets/gifs/meal-animation.gif";
@@ -71,6 +72,7 @@ const Hero = () => {
             </div>
           </div>
 
+          {/* CTA */}
           <div className="flex justify-center lg:justify-start pt-4">
             <Button size="lg" className="w-full sm:w-auto" asChild>
               <a href="#pricing">
@@ -78,6 +80,22 @@ const Hero = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
+          </div>
+
+          {/* MÉTRICAS — RESTAURADAS */}
+          <div className="flex justify-center lg:justify-start gap-8 pt-6 text-sm text-gray-600">
+            <div className="text-center">
+              <strong className="block text-purple-600 text-lg">+2.000</strong>
+              pessoas já usaram
+            </div>
+            <div className="text-center">
+              <strong className="block text-purple-600 text-lg">+50 mil</strong>
+              usuários ativos
+            </div>
+            <div className="text-center">
+              <strong className="block text-purple-600 text-lg">+200kg</strong>
+              eliminados
+            </div>
           </div>
         </div>
 

@@ -44,21 +44,25 @@ export default function Testimonials() {
     },
   ];
 
+  const firstColumn = testimonials.slice(0, 2);
+  const secondColumn = testimonials.slice(2, 4);
+  const thirdColumn = testimonials.slice(4, 6);
+
   return (
     <section
       id="testimonials"
       className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
-        {/* TÍTULO — SEMPRE VISÍVEL */}
-        <motion.div
-          initial={isMobile ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative flex justify-center mb-[-160px] z-10"
-        >
-          <div className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl">
+        {/* CARD PRETO */}
+        <div className="relative flex justify-center mb-[-160px] z-10">
+          <motion.div
+            initial={isMobile ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl"
+          >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Não acredite somente em nós — veja quem já usa.
             </h2>
@@ -66,14 +70,27 @@ export default function Testimonials() {
             <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
               Junte-se a milhares de pessoas que transformaram sua alimentação.
             </p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* CARROSSEL */}
-        <div className="relative z-20 flex justify-center gap-6 max-h-[520px] overflow-hidden">
-          <TestimonialsColumn testimonials={testimonials.slice(0, 2)} duration={16} />
+        <div
+          className={`
+            relative z-20 flex justify-center gap-6 max-h-[520px] overflow-hidden
+            ${
+              !isMobile
+                ? "[mask-image:linear-gradient(to_bottom,transparent,black_25%,black_55%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_25%,black_55%,transparent)]"
+                : ""
+            }
+          `}
+        >
+          <TestimonialsColumn testimonials={firstColumn} duration={16} />
+
           {!isMobile && (
-            <TestimonialsColumn testimonials={testimonials.slice(2, 4)} duration={20} />
+            <>
+              <TestimonialsColumn testimonials={secondColumn} duration={20} />
+              <TestimonialsColumn testimonials={thirdColumn} duration={18} />
+            </>
           )}
         </div>
       </div>

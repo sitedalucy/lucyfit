@@ -48,8 +48,8 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            A forma mais simples de organizar sua alimentação, treinos e evolução
-            é com a{" "}
+            A forma mais simples de organizar sua alimentação, treinos e
+            evolução é com a{" "}
             <span className="inline-flex items-center px-4 py-2 bg-white rounded-2xl shadow-md">
               <img src={lucyLogo} className="h-9" alt="LucyFit" />
             </span>
@@ -66,6 +66,11 @@ const Hero = () => {
               <img
                 src={heroGif}
                 alt="LucyFit conversando no WhatsApp"
+                width={390}
+                height={780}
+                loading="eager"
+                decoding="sync"
+                style={{ contentVisibility: "auto" }}
                 className="w-full rounded-2xl"
               />
             </div>

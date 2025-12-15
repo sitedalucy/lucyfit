@@ -12,7 +12,7 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden pt-24 pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
-      {/* LOGO FIXA MOBILE */}
+      {/* LOGO FIXA NO MOBILE (HOME) */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Voltar ao topo"
@@ -21,7 +21,7 @@ const Hero = () => {
         <img src={lucyLogo} className="h-6 w-auto" alt="LucyFit" />
       </button>
 
-      {/* BLOBS — DESKTOP */}
+      {/* BLOBS — DESKTOP ONLY */}
       {!isMobile && (
         <>
           <motion.div
@@ -60,7 +60,7 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE — GIF PURO */}
+          {/* MOBILE — GIF PURO (SEM MOTION, SEM OBSERVER) */}
           <div className="lg:hidden pt-6">
             <div className="mx-auto max-w-md overflow-hidden">
               <img
@@ -68,10 +68,8 @@ const Hero = () => {
                 alt="LucyFit conversando no WhatsApp"
                 width={390}
                 height={780}
-                loading="eager"
-                decoding="sync"
-                style={{ contentVisibility: "auto" }}
                 className="w-full rounded-2xl"
+                style={{ contain: "layout paint" }}
               />
             </div>
           </div>
@@ -103,7 +101,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* DESKTOP — CARD PREMIUM */}
+        {/* DESKTOP — CARD PREMIUM (INALTERADO) */}
         {!isMobile && (
           <div className="hidden lg:flex justify-center">
             <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-xl">

@@ -1,3 +1,4 @@
+// src/components/Features.tsx
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -41,9 +42,14 @@ function FeatureCard({
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
-  const isInView = useInView(ref, { margin: "-30% 0px -30% 0px" });
+
+  // ✅ HOOK SEMPRE CHAMADO (REGRA DO REACT RESPEITADA)
+  const isInView = useInView(ref, {
+    margin: "-30% 0px -30% 0px",
+  });
 
   useEffect(() => {
+    // ✅ NO MOBILE, IGNORAMOS COMPLETAMENTE O INVIEW
     if (!isMobile && isInView) {
       setActiveIndex(index);
     }
@@ -55,6 +61,7 @@ function FeatureCard({
     <div
       ref={ref}
       onMouseEnter={() => !isMobile && setActiveIndex(index)}
+      style={isMobile ? { contain: "layout paint" } : undefined}
       className={`relative cursor-pointer rounded-2xl p-6 border transition-all ${
         isActive
           ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-xl"
@@ -70,6 +77,8 @@ function FeatureCard({
           <img
             src={item.media}
             alt={item.title}
+            width={260}
+            height={520}
             className="w-full max-w-[260px]"
           />
         </div>
@@ -82,7 +91,7 @@ function FeatureCard({
         Assine agora →
       </a>
 
-      {/* BARRA DESKTOP */}
+      {/* BARRA PREMIUM — DESKTOP */}
       {!isMobile && isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
           <div className="h-full w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500" />
@@ -121,19 +130,23 @@ export default function Features() {
                 item={item}
                 index={index}
                 activeIndex={activeIndex}
-                setActiveIndex={setActiveIndex}
+                setActiveIndex={isMobile ? () => {} : setActiveIndex}
               />
             ))}
           </div>
 
-          {/* DESKTOP — STICKY PREMIUM (SEM motion.img) */}
+          {/* DESKTOP — STICKY PREMIUM */}
           {!isMobile && (
             <div className="sticky top-32">
               <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-200 bg-purple-50/40">
-                <img
+                <motion.img
+                  key={activeIndex}
                   src={features[activeIndex].media}
                   alt="LucyFit em ação"
                   className="w-full object-cover max-h-[650px]"
+                  initial={{ opacity: 0.4 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
             </div>

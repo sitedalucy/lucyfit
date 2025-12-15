@@ -11,8 +11,14 @@ const monthlyBase = {
   description: "Controle total da sua alimentação com IA pagando mês a mês.",
   features: [
     { name: "Registro de refeições por foto, texto ou áudio", included: true },
-    { name: "Cálculo automático de calorias e macronutrientes", included: true },
-    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
+    {
+      name: "Cálculo automático de calorias e macronutrientes",
+      included: true,
+    },
+    {
+      name: "Sugestões de treino e exercícios para sua rotina",
+      included: true,
+    },
     { name: "Análise inteligente da sua alimentação com IA", included: true },
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
@@ -32,8 +38,14 @@ const annualBase = {
   description: "12x R$ 19,99 — Economize mais de 30%",
   features: [
     { name: "Registro de refeições por foto, texto ou áudio", included: true },
-    { name: "Cálculo automático de calorias e macronutrientes", included: true },
-    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
+    {
+      name: "Cálculo automático de calorias e macronutrientes",
+      included: true,
+    },
+    {
+      name: "Sugestões de treino e exercícios para sua rotina",
+      included: true,
+    },
     { name: "Análise inteligente da sua alimentação com IA", included: true },
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
@@ -63,13 +75,17 @@ export default function Pricing() {
         </p>
 
         <div className="flex items-center justify-center gap-4 mt-8">
-          <span className={!showAnnual ? "font-semibold" : "text-muted-foreground"}>
+          <span
+            className={!showAnnual ? "font-semibold" : "text-muted-foreground"}
+          >
             Mensal
           </span>
 
           <Switch checked={showAnnual} onCheckedChange={setShowAnnual} />
 
-          <span className={showAnnual ? "font-semibold" : "text-muted-foreground"}>
+          <span
+            className={showAnnual ? "font-semibold" : "text-muted-foreground"}
+          >
             Anual
           </span>
 
@@ -85,7 +101,7 @@ export default function Pricing() {
         </div>
       </div>
 
-      {/* CARD */}
+      {/* CARD DO PLANO */}
       <motion.div
         initial={isMobile ? false : { opacity: 0, y: 60, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -149,6 +165,30 @@ export default function Pricing() {
         </div>
       </motion.div>
 
+      {/* ✅ GARANTIA DE 7 DIAS — RESTAURADA */}
+      <motion.div
+        initial={isMobile ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="
+          mt-24 max-w-3xl mx-auto px-8 py-10 rounded-3xl
+          bg-gradient-to-br from-green-50 via-emerald-50 to-green-100
+          border border-green-300 shadow-xl text-center
+        "
+      >
+        <ShieldCheck className="h-12 w-12 mx-auto text-green-600" />
+
+        <p className="text-xl font-bold mt-4 text-green-800">
+          Garantia de 7 dias
+        </p>
+
+        <p className="text-base mt-2 text-green-800/80">
+          Teste sem risco. Se não gostar, devolvemos 100% do seu dinheiro.
+        </p>
+      </motion.div>
+
+      {/* FOOTER INFO */}
       <div className="mt-10 flex justify-center gap-2 text-muted-foreground">
         <Shield className="h-5 w-5" />
         <p className="text-sm font-medium">Cancele quando quiser.</p>

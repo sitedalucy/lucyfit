@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import heroVideo from "@/assets/gifs/meal-animation.webm";
+import heroGif from "@/assets/gifs/meal-animation.gif";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -60,17 +60,15 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* VIDEO — MOBILE (SEM CARD) */}
+          {/* GIF — MOBILE (SEM CARD) */}
           {isMobile && (
             <div className="pt-6 flex justify-center">
-              <video
-                src={heroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full max-w-sm rounded-2xl"
+              <img
+                src={heroGif}
+                alt="LucyFit conversando no WhatsApp"
+                loading="lazy"
+                decoding="async"
+                className="w-full max-w-sm"
               />
             </div>
           )}
@@ -102,20 +100,16 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* VIDEO — DESKTOP (COM CARD) */}
+        {/* GIF — DESKTOP (SEM CARD) */}
         {!isMobile && (
           <div className="hidden lg:flex justify-center">
-            <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-xl">
-              <video
-                src={heroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full object-cover"
-              />
-            </div>
+            <img
+              src={heroGif}
+              alt="LucyFit conversando no WhatsApp"
+              loading="eager"
+              decoding="async"
+              className="w-full max-w-xl"
+            />
           </div>
         )}
       </div>

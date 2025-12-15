@@ -1,81 +1,31 @@
-import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import chatTyping from "@/assets/gifs/chat-typing.gif";
 import heroChat from "@/assets/gifs/hero-chat.gif";
-import mealVideo from "@/assets/gifs/meal-animation.webm";
+import mealGif from "@/assets/gifs/meal-animation.gif";
 
-/* ✅ TIPAGEM CORRETA */
-type FeatureMediaType = "image" | "video";
-
-type FeatureItem = {
-  id: number;
-  title: string;
-  text: string;
-  media: string;
-  type: FeatureMediaType;
-};
-
-const features: FeatureItem[] = [
+const features = [
   {
     id: 0,
     title: "Capture sua refeição e deixe a I.A fazer o resto.",
     text: "Envie uma foto e receba análise automática de calorias, nutrientes e sugestões de melhoria.",
     media: chatTyping,
-    type: "image",
   },
   {
     id: 1,
     title: "Fale com sua I.A como se fosse um nutricionista.",
     text: "Descreva seu prato por voz ou mensagem e receba a análise completa instantaneamente.",
     media: heroChat,
-    type: "image",
   },
   {
     id: 2,
     title: "Controle total, sem esforço.",
     text: "Acompanhe em tempo real quanto pode comer no dia, baseado nas suas metas.",
-    media: mealVideo,
-    type: "video",
+    media: mealGif,
   },
 ];
-
-function MediaRenderer({
-  src,
-  type,
-  alt,
-  className,
-}: {
-  src: string;
-  type: FeatureMediaType;
-  alt: string;
-  className?: string;
-}) {
-  if (type === "video") {
-    return (
-      <video
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        className={className}
-      />
-    );
-  }
-
-  return (
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      decoding="async"
-      className={className}
-    />
-  );
-}
 
 function FeatureCard({
   item,
@@ -83,7 +33,7 @@ function FeatureCard({
   activeIndex,
   setActiveIndex,
 }: {
-  item: FeatureItem;
+  item: (typeof features)[0];
   index: number;
   activeIndex: number;
   setActiveIndex: (i: number) => void;
@@ -104,25 +54,24 @@ function FeatureCard({
     <div
       ref={ref}
       onMouseEnter={() => !isMobile && setActiveIndex(index)}
-      className={`rounded-2xl p-6 border transition-all ${
-        isActive
-          ? "bg-gradient-to-br from-white via-purple-50/60 to-white border-purple-300 shadow-xl"
-          : "bg-white border-purple-100 shadow-md"
+      className={`p-6 transition-all ${
+        isActive ? "bg-purple-50/60 rounded-2xl" : ""
       }`}
     >
       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
       <p className="text-gray-600 text-sm leading-relaxed">{item.text}</p>
 
-      <div className="mt-5 rounded-xl overflow-hidden shadow">
-        <MediaRenderer
+      {/* SMARTPHONE — SEM CARD */}
+      <div className="mt-5 flex justify-center">
+        <img
           src={item.media}
-          type={item.type}
           alt={item.title}
-          className="w-full object-cover"
+          loading="lazy"
+          decoding="async"
+          className="w-full max-w-[260px]"
         />
       </div>
 
-      {/* CTA */}
       <a
         href="#pricing"
         className="inline-block mt-4 text-sm font-semibold text-purple-600 hover:text-purple-700"
@@ -156,16 +105,13 @@ export default function Features() {
             ))}
           </div>
 
-          {/* DESKTOP MEDIA */}
-          <div className="hidden lg:block sticky top-32">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-200 bg-purple-50/40">
-              <MediaRenderer
-                src={features[activeIndex].media}
-                type={features[activeIndex].type}
-                alt="LucyFit em ação"
-                className="w-full object-cover max-h-[650px]"
-              />
-            </div>
+          {/* DESKTOP — MEDIA FIXA */}
+          <div className="hidden lg:flex justify-center sticky top-32">
+            <img
+              src={features[activeIndex].media}
+              alt="LucyFit em ação"
+              className="w-full max-w-[320px]"
+            />
           </div>
         </div>
       </div>

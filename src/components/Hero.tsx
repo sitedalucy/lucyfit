@@ -2,7 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import heroGif from "@/assets/gifs/meal-animation.gif";
+import heroVideo from "@/assets/gifs/meal-animation.webm";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -11,19 +11,17 @@ const Hero = () => {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // 🔹 Controla quando o GIF aparece no mobile (performance)
-  const [showGif, setShowGif] = useState<boolean>(!isMobile);
+  // 🔹 Renderiza o vídeo no mobile após idle (performance)
+  const [showVideo, setShowVideo] = useState(!isMobile);
 
   useEffect(() => {
     if (!isMobile) return;
 
-    const timeoutId = setTimeout(() => {
-      setShowGif(true);
-    }, 1200);
+    const timeout = setTimeout(() => {
+      setShowVideo(true);
+    }, 800);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    return () => clearTimeout(timeout);
   }, [isMobile]);
 
   return (
@@ -64,8 +62,8 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            A forma mais simples de organizar sua alimentação, treinos e evolução
-            é com a{" "}
+            A forma mais simples de organizar sua alimentação, treinos e
+            evolução é com a{" "}
             <span className="inline-flex items-center px-4 py-2 bg-white rounded-2xl shadow-md">
               <img src={lucyLogo} className="h-9" alt="LucyFit" />
             </span>
@@ -76,15 +74,17 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE GIF — carregamento atrasado */}
-          {isMobile && showGif && (
+          {/* MOBILE VIDEO */}
+          {isMobile && showVideo && (
             <div className="pt-4">
               <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
-                <img
-                  src={heroGif}
-                  alt="LucyFit conversando no WhatsApp"
-                  loading="lazy"
-                  decoding="async"
+                <video
+                  src={heroVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
                   className="w-full object-cover"
                 />
               </div>
@@ -118,15 +118,17 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* DESKTOP GIF */}
+        {/* DESKTOP VIDEO */}
         {!isMobile && (
           <div className="hidden lg:flex justify-center">
             <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-xl">
-              <img
-                src={heroGif}
-                alt="LucyFit conversando no WhatsApp"
-                loading="eager"
-                decoding="async"
+              <video
+                src={heroVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
                 className="w-full object-cover"
               />
             </div>

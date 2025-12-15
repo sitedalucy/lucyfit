@@ -5,38 +5,66 @@ import { useMotionConfig } from "@/lib/motion-config";
 
 import chatTyping from "@/assets/gifs/chat-typing.gif";
 import heroChat from "@/assets/gifs/hero-chat.gif";
-import mealGif from "@/assets/gifs/meal-animation.gif";
+import mealVideo from "@/assets/gifs/meal-animation.webm";
 
-const features = [
+/* ✅ TIPO EXPLÍCITO */
+type FeatureItem = {
+  id: number;
+  title: string;
+  text: string;
+  media: string;
+  type: "image" | "video";
+};
+
+const features: FeatureItem[] = [
   {
     id: 0,
     title: "Capture sua refeição e deixe a I.A fazer o resto.",
     text: "Envie uma foto e receba análise automática de calorias, nutrientes e sugestões de melhoria.",
     media: chatTyping,
+    type: "image",
   },
   {
     id: 1,
     title: "Fale com sua I.A como se fosse um nutricionista.",
     text: "Descreva seu prato por voz ou mensagem e receba a análise completa instantaneamente.",
     media: heroChat,
+    type: "image",
   },
   {
     id: 2,
     title: "Controle total, sem esforço.",
     text: "Acompanhe em tempo real quanto pode comer no dia, baseado nas suas metas.",
-    media: mealGif,
+    media: mealVideo,
+    type: "video",
   },
 ];
 
 function MediaRenderer({
   src,
+  type,
   alt,
   className,
 }: {
   src: string;
+  type: "image" | "video";
   alt: string;
   className?: string;
 }) {
+  if (type === "video") {
+    return (
+      <video
+        src={src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className={className}
+      />
+    );
+  }
+
   return (
     <img
       src={src}
@@ -55,7 +83,7 @@ function FeatureCard({
   setActiveIndex,
   activatedRef,
 }: {
-  item: (typeof features)[0];
+  item: FeatureItem;
   index: number;
   activeIndex: number;
   setActiveIndex: (i: number) => void;
@@ -64,16 +92,13 @@ function FeatureCard({
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
 
-  // ✅ HOOK SEMPRE CHAMADO (regra do React)
   const isInView = useInView(ref, {
     margin: "-30% 0px -30% 0px",
   });
 
   useEffect(() => {
-    // 🔒 Mobile IGNORA completamente viewport logic
     if (isMobile) return;
 
-    // 🔒 Cada card ativa apenas UMA vez
     if (isInView && !activatedRef.current.has(index)) {
       activatedRef.current.add(index);
       setActiveIndex(index);
@@ -99,6 +124,7 @@ function FeatureCard({
       <div className="lg:hidden mt-5 rounded-xl overflow-hidden shadow">
         <MediaRenderer
           src={item.media}
+          type={item.type}
           alt={item.title}
           className="w-full object-cover"
         />
@@ -117,14 +143,11 @@ export default function Features() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
   const motionCfg = useMotionConfig();
-
-  // 🔒 Guarda quais cards já ativaram (não reativa ao voltar scroll)
   const activatedRef = useRef<Set<number>>(new Set());
 
   return (
     <section id="features" className="py-32 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
-        {/* TÍTULO — SEMPRE VISÍVEL */}
         {isMobile ? (
           <h2 className="text-4xl font-bold text-center mb-20">
             Como a LucyFit te ajuda todos os dias
@@ -163,6 +186,7 @@ export default function Features() {
               >
                 <MediaRenderer
                   src={features[activeIndex].media}
+                  type={features[activeIndex].type}
                   alt="LucyFit em ação"
                   className="w-full object-cover max-h-[650px]"
                 />

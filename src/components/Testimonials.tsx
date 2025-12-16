@@ -1,5 +1,6 @@
 // src/components/Testimonials.tsx
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -12,113 +13,99 @@ const videos = [depo1, depo2, depo3, depo4];
 
 export default function Testimonials() {
   const isMobile = useIsMobile();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [active, setActive] = useState(0);
 
   const prev = () =>
-    setActiveIndex((i) => (i === 0 ? videos.length - 1 : i - 1));
+    setActive((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
   const next = () =>
-    setActiveIndex((i) => (i === videos.length - 1 ? 0 : i + 1));
+    setActive((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
 
   return (
     <section
       id="testimonials"
       className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl px-6">
-        {/* TÍTULO */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Não acredite só na gente.
-          </h2>
-          <p className="mt-4 text-gray-600 max-w-xl mx-auto">
-            Veja o que usuários reais dizem sobre a Lucy Fit.
-          </p>
+      <div className="container mx-auto max-w-7xl px-6 relative">
+        {/* CARD PRETO — MANTIDO */}
+        <div className="relative flex justify-center mb-[-180px] z-10">
+          <motion.div
+            initial={isMobile ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl"
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Não acredite somente em nós — veja o que nossos usuários dizem sobre nós.
+            </h2>
+
+            <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
+              Pessoas reais, resultados reais, experiências reais.
+            </p>
+          </motion.div>
         </div>
 
-        {/* MOBILE */}
-        {isMobile ? (
-          <div className="flex gap-6 overflow-x-auto pb-4 scroll-smooth">
-            {videos.map((video, i) => (
-              <div
-                key={i}
-                className="min-w-[280px] bg-white rounded-2xl shadow-md p-4"
-              >
-                <video
-                  src={video}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  className="w-full rounded-xl"
-                />
+        {/* STACKED VIDEO CAROUSEL */}
+        <div className="relative z-20 mt-20 flex items-center justify-center h-[420px]">
+          {videos.map((video, index) => {
+            const offset = index - active;
 
-                <div className="flex justify-center gap-1 mt-3">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star
-                      key={j}
-                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
+            if (Math.abs(offset) > 1 && !isMobile) return null;
+
+            return (
+              <div
+                key={index}
+                className="absolute transition-all duration-500 ease-out"
+                style={{
+                  transform: `
+                    translateX(${offset * 220}px)
+                    scale(${index === active ? 1 : 0.85})
+                  `,
+                  zIndex: index === active ? 10 : 5,
+                  opacity: index === active ? 1 : 0.5,
+                }}
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black w-[260px] h-[420px]">
+                  <video
+                    src={video}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    autoPlay={index === active}
+                    loop={index === active}
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* ⭐ AVALIAÇÃO */}
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className="fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          /* DESKTOP */
-          <div className="relative flex items-center justify-center gap-8">
-            {/* SETA ESQUERDA */}
-            <button
-              onClick={prev}
-              className="absolute left-0 z-10 rounded-full bg-white shadow-lg p-3 hover:bg-purple-50"
-            >
-              <ChevronLeft />
-            </button>
+            );
+          })}
 
-            {/* CARDS */}
-            <div className="flex items-center gap-8">
-              {videos.map((video, i) => {
-                const isActive = i === activeIndex;
+          {/* CONTROLES */}
+          <button
+            onClick={prev}
+            className="absolute left-0 md:left-10 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+          >
+            <ChevronLeft />
+          </button>
 
-                return (
-                  <div
-                    key={i}
-                    className={`transition-all duration-500 rounded-3xl bg-white p-4
-                      ${
-                        isActive
-                          ? "scale-105 shadow-2xl"
-                          : "scale-90 opacity-50"
-                      }
-                    `}
-                  >
-                    <video
-                      src={video}
-                      controls={isActive}
-                      preload="metadata"
-                      playsInline
-                      className="w-[320px] rounded-2xl"
-                    />
-
-                    <div className="flex justify-center gap-1 mt-4">
-                      {Array.from({ length: 5 }).map((_, j) => (
-                        <Star
-                          key={j}
-                          className="h-5 w-5 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* SETA DIREITA */}
-            <button
-              onClick={next}
-              className="absolute right-0 z-10 rounded-full bg-white shadow-lg p-3 hover:bg-purple-50"
-            >
-              <ChevronRight />
-            </button>
-          </div>
-        )}
+          <button
+            onClick={next}
+            className="absolute right-0 md:right-10 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+          >
+            <ChevronRight />
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -16,12 +16,12 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
 
   const prev = () =>
-    setActive((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+    setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
   const next = () =>
-    setActive((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
+    setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
 
-  const leftIndex = (active - 1 + videos.length) % videos.length;
-  const rightIndex = (active + 1) % videos.length;
+  const left = (active - 1 + videos.length) % videos.length;
+  const right = (active + 1) % videos.length;
 
   return (
     <section
@@ -30,7 +30,7 @@ export default function Testimonials() {
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
         {/* CARD PRETO */}
-        <div className="relative flex justify-center z-10 mb-[-120px]">
+        <div className="relative flex justify-center z-10 mb-[-140px]">
           <motion.div
             initial={isMobile ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,37 +49,40 @@ export default function Testimonials() {
         </div>
 
         {/* CONTAINER DOS VÍDEOS */}
-        <div className="relative flex justify-center items-center h-[460px] mt-10">
-          {/* VÍDEO ESQUERDO */}
+        <div className="relative flex justify-center items-center h-[520px] mt-16">
+          {/* ESQUERDA */}
           {!isMobile && (
-            <div className="absolute left-1/2 -translate-x-[340px] scale-90 opacity-40 z-10 blur-[1px]">
-              <VideoCard src={videos[leftIndex]} />
-            </div>
+            <VideoCard
+              src={videos[left]}
+              position="left"
+            />
           )}
 
-          {/* VÍDEO CENTRAL */}
-          <div className="relative z-20 scale-100">
-            <VideoCard src={videos[active]} active />
-          </div>
+          {/* CENTRO */}
+          <VideoCard
+            src={videos[active]}
+            active
+          />
 
-          {/* VÍDEO DIREITO */}
+          {/* DIREITA */}
           {!isMobile && (
-            <div className="absolute left-1/2 translate-x-[340px] scale-90 opacity-40 z-10 blur-[1px]">
-              <VideoCard src={videos[rightIndex]} />
-            </div>
+            <VideoCard
+              src={videos[right]}
+              position="right"
+            />
           )}
 
           {/* CONTROLES */}
           <button
             onClick={prev}
-            className="absolute left-0 md:left-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+            className="absolute left-4 md:left-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white transition"
           >
             <ChevronLeft />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-0 md:right-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+            className="absolute right-4 md:right-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white transition"
           >
             <ChevronRight />
           </button>
@@ -89,17 +92,36 @@ export default function Testimonials() {
   );
 }
 
-/* ================= COMPONENTE DO CARD ================= */
+/* ===================== VIDEO CARD ===================== */
 
 function VideoCard({
   src,
   active = false,
+  position,
 }: {
   src: string;
   active?: boolean;
+  position?: "left" | "right";
 }) {
+  const base =
+    "absolute rounded-3xl overflow-hidden bg-black shadow-2xl transition-all duration-500";
+
+  const variants = {
+    center: "z-20 scale-100 opacity-100",
+    left:
+      "z-10 scale-90 -translate-x-[320px] opacity-40 blur-[1px]",
+    right:
+      "z-10 scale-90 translate-x-[320px] opacity-40 blur-[1px]",
+  };
+
+  const cls = active
+    ? variants.center
+    : position === "left"
+    ? variants.left
+    : variants.right;
+
   return (
-    <div className="w-[260px] h-[440px] rounded-3xl overflow-hidden bg-black shadow-2xl relative">
+    <div className={`${base} ${cls} w-[260px] h-[440px]`}>
       <video
         src={src}
         muted

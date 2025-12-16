@@ -173,6 +173,80 @@ export default function Pricing() {
         </span>
       </div>
 
+      {/* ================= GARANTIA 30 DIAS ================= */}
+      <div className="mt-24">
+        <div className="relative mx-auto max-w-6xl rounded-3xl border border-purple-200 bg-gradient-to-br from-white via-purple-50/60 to-white shadow-2xl px-8 py-14 overflow-hidden">
+          {/* BACKGROUND DECOR DESKTOP */}
+          <div className="hidden lg:block absolute -top-20 -left-20 w-72 h-72 bg-purple-300/20 rounded-full blur-[120px]" />
+          <div className="hidden lg:block absolute -bottom-20 -right-20 w-72 h-72 bg-pink-300/20 rounded-full blur-[120px]" />
+
+          <div className="relative grid lg:grid-cols-2 gap-12 items-center">
+            {/* TEXTO */}
+            <div className="space-y-5 text-center lg:text-left">
+              <h3 className="text-3xl lg:text-4xl font-bold">
+                <span className="text-purple-600">Experimente a Lucy Fit</span>{" "}
+                por 30 dias
+              </h3>
+
+              <p className="text-gray-600 text-base lg:text-lg">
+                Experimente a Lucy Fit por 1 mês e veja como é simples organizar
+                sua alimentação e treinos direto no WhatsApp.
+              </p>
+
+              <p className="text-gray-600">
+                Se dentro de 30 dias você não gostar ou não se adaptar, é só
+                pedir —
+                <strong className="text-purple-600">
+                  {" "}
+                  devolvemos 100% do seu dinheiro
+                </strong>
+                .
+              </p>
+
+              <p className="font-medium text-gray-700">
+                Sem riscos. Sem complicação. Só resultados reais.
+              </p>
+
+              {/* CTA */}
+              <div className="pt-4">
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 px-8 py-4 text-white font-semibold shadow-lg hover:scale-[1.02] transition-transform"
+                >
+                  Quero experimentar por 30 dias
+                </a>
+              </div>
+            </div>
+
+            {/* MOEDA */}
+            <div className="flex justify-center">
+              <div className="relative w-52 h-52 rounded-full bg-gradient-to-br from-gray-100 via-white to-gray-200 shadow-xl border border-gray-300 flex items-center justify-center">
+                {/* TEXTO INTERNO */}
+                <div className="text-center">
+                  <div className="text-4xl font-extrabold text-gray-800">
+                    30
+                  </div>
+                  <div className="text-sm font-semibold tracking-widest text-gray-700">
+                    DIAS
+                  </div>
+                  <div className="mt-1 text-xs text-gray-600">
+                    No plano anual
+                  </div>
+                </div>
+
+                {/* TEXTO EXTERNO */}
+                <div className="absolute -bottom-10 text-center text-xs text-gray-600 max-w-[220px]">
+                  <strong>Satisfação garantida</strong>
+                  <br />
+                  ou seu dinheiro de volta
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* ================= FIM GARANTIA ================= */}
+
       {/* FOOTER INFO */}
       <div className="mt-10 flex justify-center gap-2 text-muted-foreground">
         <Shield className="h-5 w-5" />

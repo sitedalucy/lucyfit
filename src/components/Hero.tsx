@@ -1,5 +1,5 @@
 // src/components/Hero.tsx
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import heroGif from "@/assets/gifs/meal-animation.gif";
 import lucyLogo from "@/assets/images/lucy-logo.png";
@@ -48,8 +48,8 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            A forma mais simples de organizar sua alimentação, treinos e
-            evolução é com a{" "}
+            A forma mais simples de organizar sua alimentação, treinos e evolução
+            é com a{" "}
             <span className="inline-flex items-center px-4 py-2 bg-white rounded-2xl shadow-md">
               <img src={lucyLogo} className="h-9" alt="LucyFit" />
             </span>
@@ -97,6 +97,29 @@ const Hero = () => {
             <div className="text-center">
               <strong className="block text-purple-600 text-lg">+1.500kg</strong>
               perdidos
+            </div>
+          </div>
+
+          {/* ✅ NOVO: AVALIAÇÃO (PREMIUM) */}
+          <div className="pt-6 flex flex-col items-center lg:items-start gap-2">
+            <p className="text-sm text-gray-600 font-medium">
+              Nossos usuários aprovaram
+            </p>
+
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    size={18}
+                    className="fill-yellow-400 text-yellow-400 drop-shadow"
+                  />
+                ))}
+              </div>
+
+              <span className="text-sm font-semibold text-gray-700">
+                4.95/5
+              </span>
             </div>
           </div>
         </div>

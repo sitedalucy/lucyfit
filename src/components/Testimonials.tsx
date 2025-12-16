@@ -20,20 +20,23 @@ export default function Testimonials() {
   const next = () =>
     setActive((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
 
+  const leftIndex = (active - 1 + videos.length) % videos.length;
+  const rightIndex = (active + 1) % videos.length;
+
   return (
     <section
       id="testimonials"
-      className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
+      className="relative py-40 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
-        {/* CARD PRETO — MANTIDO */}
-        <div className="relative flex justify-center mb-[-180px] z-10">
+        {/* CARD PRETO */}
+        <div className="relative flex justify-center z-10 mb-[-120px]">
           <motion.div
             initial={isMobile ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl"
+            className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-32 text-center shadow-2xl"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Não acredite somente em nós — veja o que nossos usuários dizem sobre nós.
@@ -45,68 +48,78 @@ export default function Testimonials() {
           </motion.div>
         </div>
 
-        {/* STACKED VIDEO CAROUSEL */}
-        <div className="relative z-20 mt-20 flex items-center justify-center h-[420px]">
-          {videos.map((video, index) => {
-            const offset = index - active;
+        {/* CONTAINER DOS VÍDEOS */}
+        <div className="relative flex justify-center items-center h-[460px] mt-10">
+          {/* VÍDEO ESQUERDO */}
+          {!isMobile && (
+            <div className="absolute left-1/2 -translate-x-[340px] scale-90 opacity-40 z-10 blur-[1px]">
+              <VideoCard src={videos[leftIndex]} />
+            </div>
+          )}
 
-            if (Math.abs(offset) > 1 && !isMobile) return null;
+          {/* VÍDEO CENTRAL */}
+          <div className="relative z-20 scale-100">
+            <VideoCard src={videos[active]} active />
+          </div>
 
-            return (
-              <div
-                key={index}
-                className="absolute transition-all duration-500 ease-out"
-                style={{
-                  transform: `
-                    translateX(${offset * 220}px)
-                    scale(${index === active ? 1 : 0.85})
-                  `,
-                  zIndex: index === active ? 10 : 5,
-                  opacity: index === active ? 1 : 0.5,
-                }}
-              >
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black w-[260px] h-[420px]">
-                  <video
-                    src={video}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    autoPlay={index === active}
-                    loop={index === active}
-                    className="w-full h-full object-cover"
-                  />
-
-                  {/* ⭐ AVALIAÇÃO */}
-                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className="fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {/* VÍDEO DIREITO */}
+          {!isMobile && (
+            <div className="absolute left-1/2 translate-x-[340px] scale-90 opacity-40 z-10 blur-[1px]">
+              <VideoCard src={videos[rightIndex]} />
+            </div>
+          )}
 
           {/* CONTROLES */}
           <button
             onClick={prev}
-            className="absolute left-0 md:left-10 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+            className="absolute left-0 md:left-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
           >
             <ChevronLeft />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-0 md:right-10 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
+            className="absolute right-0 md:right-16 z-30 p-3 rounded-full bg-white/90 shadow-md hover:bg-white"
           >
             <ChevronRight />
           </button>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ================= COMPONENTE DO CARD ================= */
+
+function VideoCard({
+  src,
+  active = false,
+}: {
+  src: string;
+  active?: boolean;
+}) {
+  return (
+    <div className="w-[260px] h-[440px] rounded-3xl overflow-hidden bg-black shadow-2xl relative">
+      <video
+        src={src}
+        muted
+        playsInline
+        preload="metadata"
+        autoPlay={active}
+        loop={active}
+        className="w-full h-full object-cover"
+      />
+
+      {/* ESTRELAS */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star
+            key={i}
+            size={16}
+            className="fill-yellow-400 text-yellow-400"
+          />
+        ))}
+      </div>
+    </div>
   );
 }

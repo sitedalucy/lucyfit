@@ -3,7 +3,7 @@ export default function Guarantee() {
   return (
     <section id="guarantee" className="bg-white">
       {/* ================= GARANTIA 30 DIAS ================= */}
-      <div className="py-16 lg:py-20 px-4">
+      <div className="py-12 lg:py-20 px-4">
         <div className="relative mx-auto max-w-6xl rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-50/40 via-white to-purple-50/30 shadow-2xl px-6 py-12 lg:px-12 lg:py-16 overflow-hidden">
           {/* DECOR DESKTOP */}
           <div className="hidden lg:block absolute -top-24 -left-24 w-96 h-96 bg-purple-300/20 rounded-full blur-[140px]" />

@@ -11,7 +11,7 @@ const Hero = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
+    <section className="relative overflow-hidden pt-20 pb-20 lg:pt-24 lg:pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
       {/* LOGO FIXA NO MOBILE (HOME) */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

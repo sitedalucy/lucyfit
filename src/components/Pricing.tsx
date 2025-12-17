@@ -64,9 +64,9 @@ export default function Pricing() {
   const activeTier = showAnnual ? annualBase : monthlyBase;
 
   return (
-    <section id="pricing" className="py-28 bg-white relative overflow-hidden">
+    <section id="pricing" className="py-20 lg:py-28 bg-white relative overflow-hidden">
       {/* HEADER */}
-      <div className="text-center mb-20">
+      <div className="text-center mb-12 lg:mb-20">
         <h2 className="text-4xl md:text-5xl font-bold">
           Invista na sua saúde por menos que um lanche.
         </h2>

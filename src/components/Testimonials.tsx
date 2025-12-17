@@ -98,7 +98,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-32 bg-gradient-to-b from-purple-50/40 via-black/40 to-black overflow-hidden"
+      className="relative py-20 lg:py-32 bg-gradient-to-b from-purple-50/40 via-black/40 to-black overflow-hidden"
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
         {/* CARD PRETO (TÍTULO) */}

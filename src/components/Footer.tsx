@@ -3,7 +3,7 @@ import lucyLogo from "@/assets/images/lucy-logo.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-white to-purple-50 pt-20 pb-12 mt-20 border-t border-purple-100/40">
+    <footer className="bg-gradient-to-b from-white to-purple-50 pt-16 lg:pt-20 pb-12 mt-20 border-t border-purple-100/40">
       <div className="container mx-auto px-6 max-w-7xl">
         {/* TOP GRID */}
         <div className="grid md:grid-cols-4 gap-12 mb-16">

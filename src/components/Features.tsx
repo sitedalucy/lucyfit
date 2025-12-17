@@ -107,10 +107,10 @@ export default function Features() {
   const motionCfg = useMotionConfig();
 
   return (
-    <section id="features" className="py-32 bg-white">
+    <section id="features" className="py-16 lg:py-32 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
         {isMobile ? (
-          <h2 className="text-4xl font-bold text-center mb-20">
+          <h2 className="text-4xl font-bold text-center mb-12 lg:mb-20">
             Como a LucyFit te ajuda todos os dias
           </h2>
         ) : (
@@ -122,7 +122,7 @@ export default function Features() {
           </motion.h2>
         )}
 
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start">
           <div className="space-y-10">
             {features.map((item, index) => (
               <FeatureCard

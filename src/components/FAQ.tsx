@@ -43,13 +43,13 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="py-28 bg-gradient-to-b from-white via-purple-50/20 to-white"
+      className="py-16 lg:py-28 bg-gradient-to-b from-white via-purple-50/20 to-white"
     >
       <div className="container mx-auto px-6 max-w-4xl">
 
         {/* 🔥 HEADER — SEMPRE VISÍVEL */}
         {isMobile ? (
-          <div className="text-center mb-14 space-y-4">
+          <div className="text-center mb-10 lg:mb-14 space-y-4">
             <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
               <span className="text-xs tracking-[0.25em] text-purple-700 font-semibold uppercase">
                 Dúvidas frequentes

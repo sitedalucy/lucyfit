@@ -101,17 +101,17 @@ const Hero = () => {
           </div>
 
           {/* ✅ NOVO: AVALIAÇÃO (PREMIUM) */}
-          <div className="pt-6 flex flex-col items-center lg:items-start gap-2">
+          <div className="pt-8 flex flex-col items-center lg:items-start gap-2">
             <p className="text-sm text-gray-600 font-medium">
               Nossos usuários aprovaram
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <div className="flex gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    size={18}
+                    size={22}
                     className="fill-yellow-400 text-yellow-400 drop-shadow"
                   />
                 ))}

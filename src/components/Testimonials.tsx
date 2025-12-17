@@ -77,7 +77,7 @@ export default function Testimonials() {
               relative w-full max-w-5xl rounded-3xl bg-black
               px-6 md:px-10
               pt-12 md:pt-20
-              pb-14 lg:pb-36
+              pb-16 lg:pb-36
               text-center shadow-2xl
             "
           >
@@ -89,8 +89,12 @@ export default function Testimonials() {
               Junte-se a milhares de pessoas que transformaram sua alimentação.
             </p>
 
-            {/* FADE INFERIOR — MOBILE ONLY */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 md:hidden pointer-events-none bg-gradient-to-b from-black to-transparent" />
+            {/* FADE MOBILE AJUSTADO */}
+            <div className="
+              absolute bottom-0 left-0 right-0
+              h-16 md:hidden pointer-events-none
+              bg-gradient-to-b from-black/60 via-black/30 to-transparent
+            " />
           </motion.div>
         </div>
 
@@ -101,11 +105,11 @@ export default function Testimonials() {
           </div>
         )}
 
-        {/* COMMENTS — MOBILE */}
+        {/* COMMENTS — MOBILE (AUTOMÁTICO) */}
         {isMobile && <MobileComments comments={comments} />}
 
         {/* VÍDEOS */}
-        <div className="relative mt-6 lg:mt-6 flex justify-center items-center h-[520px] z-10">
+        <div className="relative mt-6 flex justify-center items-center h-[520px] z-10">
           <VideoCard data={videos[left]} pos="left" isMobile={isMobile} onClick={() => setActive(left)} />
           <VideoCard data={videos[active]} pos="center" isMobile={isMobile} />
           <VideoCard data={videos[right]} pos="right" isMobile={isMobile} onClick={() => setActive(right)} />
@@ -193,18 +197,26 @@ function CommentCard({ c }: { c: Comment }) {
   );
 }
 
-/* ================= COMMENTS (MOBILE) ================= */
+/* ================= COMMENTS (MOBILE — AUTO) ================= */
 
 function MobileComments({ comments }: { comments: Comment[] }) {
+  const loop = [...comments, ...comments];
+
   return (
-    <div className="relative z-10 -mt-10 mb-6">
-      <div className="flex gap-4 overflow-x-auto pb-2 px-1 snap-x snap-mandatory scrollbar-hide">
-        {comments.map((c, idx) => (
+    <div className="relative z-20 -mt-4 mb-6 overflow-hidden">
+      <div className="mobile-comment-stream animate-mobileCommentStream">
+        {loop.map((c, idx) => (
           <div
             key={idx}
-            className="min-w-[260px] max-w-[260px] snap-center rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
+            className="min-w-[260px] max-w-[260px] mx-2 rounded-2xl
+              border border-white/10
+              bg-black/40 backdrop-blur-md
+              px-4 py-4
+              shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
           >
-            <p className="text-white/90 text-[13px] leading-relaxed">“{c.quote}”</p>
+            <p className="text-white/90 text-[13px] leading-relaxed">
+              “{c.quote}”
+            </p>
 
             <div className="mt-4 flex items-center justify-between">
               <div>
@@ -221,6 +233,23 @@ function MobileComments({ comments }: { comments: Comment[] }) {
           </div>
         ))}
       </div>
+
+      <style>{`
+        .mobile-comment-stream {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+
+        @keyframes mobileCommentStream {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .animate-mobileCommentStream {
+          animation: mobileCommentStream 28s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }

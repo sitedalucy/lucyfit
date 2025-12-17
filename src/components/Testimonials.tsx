@@ -203,7 +203,7 @@ function MobileComments({ comments }: { comments: Comment[] }) {
   const loop = [...comments, ...comments];
 
   return (
-    <div className="relative z-20 -mt-4 mb-6 overflow-hidden">
+    <div className="relative z-30 -mt-2 mb-6 overflow-hidden">
       <div className="mobile-comment-stream animate-mobileCommentStream">
         {loop.map((c, idx) => (
           <div
@@ -285,11 +285,12 @@ function VideoCard({
         <video
           src={data.src}
           autoPlay={isCenter}
-          muted
+          muted={!isCenter}
           loop
           playsInline
           preload="metadata"
           className="w-full h-full object-cover"
+          
         />
       </div>
 

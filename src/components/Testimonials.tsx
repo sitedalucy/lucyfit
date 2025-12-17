@@ -76,8 +76,8 @@ export default function Testimonials() {
             className="
               relative w-full max-w-5xl rounded-3xl bg-black
               px-6 md:px-10
-              pt-12 md:pt-14
-              pb-20 lg:pb-36
+              pt-12 md:pt-20
+              pb-14 lg:pb-36
               text-center shadow-2xl
             "
           >
@@ -90,7 +90,7 @@ export default function Testimonials() {
             </p>
 
             {/* FADE INFERIOR — MOBILE ONLY */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 md:hidden pointer-events-none bg-gradient-to-b from-black to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-24 md:hidden pointer-events-none bg-gradient-to-b from-black to-transparent" />
           </motion.div>
         </div>
 
@@ -105,7 +105,7 @@ export default function Testimonials() {
         {isMobile && <MobileComments comments={comments} />}
 
         {/* VÍDEOS */}
-        <div className="relative mt-2 lg:mt-4 flex justify-center items-center h-[520px] z-10">
+        <div className="relative mt-6 lg:mt-6 flex justify-center items-center h-[520px] z-10">
           <VideoCard data={videos[left]} pos="left" isMobile={isMobile} onClick={() => setActive(left)} />
           <VideoCard data={videos[active]} pos="center" isMobile={isMobile} />
           <VideoCard data={videos[right]} pos="right" isMobile={isMobile} onClick={() => setActive(right)} />

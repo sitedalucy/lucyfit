@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Shield, ShieldCheck, Star } from "lucide-react";
+import { ShieldCheck, Star, Shield } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -11,14 +11,8 @@ const monthlyBase = {
   description: "Controle total da sua alimentação com IA pagando mês a mês.",
   features: [
     { name: "Registro de refeições por foto, texto ou áudio", included: true },
-    {
-      name: "Cálculo automático de calorias e macronutrientes",
-      included: true,
-    },
-    {
-      name: "Sugestões de treino e exercícios para sua rotina",
-      included: true,
-    },
+    { name: "Cálculo automático de calorias e macronutrientes", included: true },
+    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
     { name: "Análise inteligente da sua alimentação com IA", included: true },
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
@@ -38,14 +32,8 @@ const annualBase = {
   description: "12x R$ 19,99 — Economize mais de 30%",
   features: [
     { name: "Registro de refeições por foto, texto ou áudio", included: true },
-    {
-      name: "Cálculo automático de calorias e macronutrientes",
-      included: true,
-    },
-    {
-      name: "Sugestões de treino e exercícios para sua rotina",
-      included: true,
-    },
+    { name: "Cálculo automático de calorias e macronutrientes", included: true },
+    { name: "Sugestões de treino e exercícios para sua rotina", included: true },
     { name: "Análise inteligente da sua alimentação com IA", included: true },
     { name: "Metas ajustadas conforme seus hábitos", included: true },
     { name: "Histórico de refeições e treinos no WhatsApp", included: true },
@@ -70,22 +58,18 @@ export default function Pricing() {
         <h2 className="text-4xl md:text-5xl font-bold">
           Invista na sua saúde por menos que um lanche.
         </h2>
-        <p className="text-muted-foreground mt-4 text-lg">
+        <p className="text-gray-500 mt-4 text-lg">
           Escolha o plano ideal para você
         </p>
 
         <div className="flex items-center justify-center gap-4 mt-8">
-          <span
-            className={!showAnnual ? "font-semibold" : "text-muted-foreground"}
-          >
+          <span className={!showAnnual ? "font-semibold" : "text-gray-400"}>
             Mensal
           </span>
 
           <Switch checked={showAnnual} onCheckedChange={setShowAnnual} />
 
-          <span
-            className={showAnnual ? "font-semibold" : "text-muted-foreground"}
-          >
+          <span className={showAnnual ? "font-semibold" : "text-gray-400"}>
             Anual
           </span>
 
@@ -154,7 +138,7 @@ export default function Pricing() {
           <a
             href={activeTier.cta.href}
             target="_blank"
-            className={`block mt-10 w-full text-center py-4 rounded-xl text-lg font-semibold shadow-lg ${
+            className={`block mt-10 w-full text-center py-4 rounded-xl text-lg font-semibold shadow-lg transition ${
               showAnnual
                 ? "bg-yellow-400 text-gray-900 hover:bg-yellow-300"
                 : "bg-purple-600 text-white hover:bg-purple-700"
@@ -165,18 +149,24 @@ export default function Pricing() {
         </div>
       </motion.div>
 
-      {/* ✅ GARANTIA DE 7 DIAS — LEVE E MOBILE FRIENDLY */}
-      <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-        <Shield className="h-4 w-4" />
-        <span>
-          Garantia de 7 dias — teste sem risco. Devolvemos 100% do seu dinheiro.
-        </span>
+      {/* 🔐 BLOCO DE GARANTIA — PREMIUM */}
+      <div className="mt-10 flex justify-center px-6">
+        <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50 px-6 py-4 shadow-sm max-w-xl w-full">
+          <ShieldCheck className="h-6 w-6 text-purple-600 shrink-0" />
+          <p className="text-sm md:text-base text-gray-700 font-medium leading-relaxed">
+            Garantia de <strong>7 dias</strong> — teste sem risco.
+            <br className="md:hidden" />
+            Devolvemos <strong>100% do seu dinheiro</strong>.
+          </p>
+        </div>
       </div>
 
-      {/* FOOTER INFO */}
-      <div className="mt-10 flex justify-center gap-2 text-muted-foreground">
-        <Shield className="h-5 w-5" />
-        <p className="text-sm font-medium">Cancele quando quiser.</p>
+      {/* 🔄 CANCELAMENTO */}
+      <div className="mt-6 flex justify-center">
+        <div className="flex items-center gap-2 text-gray-600 text-sm font-medium">
+          <Shield className="h-4 w-4 text-gray-500" />
+          <span>Cancele quando quiser.</span>
+        </div>
       </div>
     </section>
   );

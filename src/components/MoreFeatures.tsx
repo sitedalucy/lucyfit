@@ -94,7 +94,7 @@ export default function MoreFeatures() {
   const isMobile = useIsMobile();
 
   return (
-    <section className="py-16 lg:py-28 bg-gradient-to-b from-white via-purple-50/20 to-white">
+    <section className="py-10 lg:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white">
       <div className="container mx-auto max-w-7xl px-6">
         {/* HEADER */}
         <div className="text-center mb-10 lg:mb-16 space-y-4">

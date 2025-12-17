@@ -64,7 +64,7 @@ export default function Pricing() {
   const activeTier = showAnnual ? annualBase : monthlyBase;
 
   return (
-    <section id="pricing" className="py-20 lg:py-28 bg-white relative overflow-hidden">
+    <section id="pricing" className="py-5 lg:py-20 bg-white relative overflow-hidden">
       {/* HEADER */}
       <div className="text-center mb-12 lg:mb-20">
         <h2 className="text-4xl md:text-5xl font-bold">
@@ -166,7 +166,7 @@ export default function Pricing() {
       </motion.div>
 
       {/* ✅ GARANTIA DE 7 DIAS — LEVE E MOBILE FRIENDLY */}
-      <div className="mt-8 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+      <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
         <Shield className="h-4 w-4" />
         <span>
           Garantia de 7 dias — teste sem risco. Devolvemos 100% do seu dinheiro.

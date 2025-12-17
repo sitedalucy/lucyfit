@@ -43,7 +43,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="py-16 lg:py-28 bg-gradient-to-b from-white via-purple-50/20 to-white"
+      className="py-10 lg:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white"
     >
       <div className="container mx-auto px-6 max-w-4xl">
 

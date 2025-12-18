@@ -258,7 +258,7 @@ function MobileComments({ comments }: { comments: Comment[] }) {
   const loop = [...comments, ...comments];
 
   return (
-    <div className="relative z-30 -mt-2 mb-6 overflow-hidden">
+    <div className="relative z-10 -mt-2 mb-6 overflow-hidden">
       {/* faixa de comentários */}
       <div className="mobile-comment-stream animate-mobileCommentStream">
         {loop.map((c, idx) => (
@@ -291,17 +291,17 @@ function MobileComments({ comments }: { comments: Comment[] }) {
       </div>
 
       {/* gradiente lateral para esconder o fim da faixa */}
-      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-neutral-800 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-neutral-800 via-neutral-900/60 to-transparent pointer-events-none" />
 
       {/* leve fade inferior para tirar a “linha” da base */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-neutral-800 via-neutral-900/60 to-transparent pointer-events-none" />
 
       <style>{`
         .mobile-comment-stream {
           display: flex;
           width: max-content;
-          gap: 14px;
+          gap: 12px;
           will-change: transform;
         }
 
@@ -385,7 +385,6 @@ function VideoCard({
           ref={videoRef}
           src={data.src}
           autoPlay={isCenter}
-          muted // sempre começa mudo; o clique libera áudio no card central
           loop
           playsInline
           preload="auto"

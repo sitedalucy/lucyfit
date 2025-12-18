@@ -258,7 +258,7 @@ function MobileComments({ comments }: { comments: Comment[] }) {
   const loop = [...comments, ...comments];
 
   return (
-    <div className="relative z-10 -mt-2 mb-6 overflow-hidden">
+    <div className="relative z-30 -mt-2 mb-6 overflow-hidden">
       {/* faixa de comentários */}
       <div className="mobile-comment-stream animate-mobileCommentStream">
         {loop.map((c, idx) => (
@@ -301,7 +301,7 @@ function MobileComments({ comments }: { comments: Comment[] }) {
         .mobile-comment-stream {
           display: flex;
           width: max-content;
-          gap: 12px;
+          gap: 10px;
           will-change: transform;
         }
 

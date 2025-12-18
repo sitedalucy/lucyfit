@@ -258,17 +258,17 @@ function MobileComments({ comments }: { comments: Comment[] }) {
   const loop = [...comments, ...comments];
 
   return (
-    <div className="relative z-30 -mt-4 mb-6 overflow-hidden">
+    <div className="relative z-30 -mt-2 mb-6 overflow-hidden">
       {/* faixa de comentários */}
       <div className="mobile-comment-stream animate-mobileCommentStream">
         {loop.map((c, idx) => (
           <div
             key={idx}
-            className="min-w-[260px] max-w-[260px] mx-2 rounded-2xl
+            className="min-w-[250px] max-w-[250px] mx-2 rounded-2xl
               border border-white/10
-              bg-black/40 backdrop-blur-md
+              bg-white/5 backdrop-blur-md
               px-4 py-4
-              shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
+              shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
           >
             <p className="text-white/90 text-[13px] leading-relaxed">
               “{c.quote}”
@@ -276,8 +276,8 @@ function MobileComments({ comments }: { comments: Comment[] }) {
 
             <div className="mt-4 flex items-center justify-between">
               <div>
-                <p className="text-white font-semibold text-sm">{c.name}</p>
-                <p className="text-white/60 text-xs">{c.role}</p>
+                <p className="text-white font-semibold text-sm truncate">{c.name}</p>
+                <p className="text-white/60 text-xs truncate">{c.role}</p>
               </div>
 
               <div className="flex gap-0.5">
@@ -291,16 +291,17 @@ function MobileComments({ comments }: { comments: Comment[] }) {
       </div>
 
       {/* gradiente lateral para esconder o fim da faixa */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-neutral-900 via-neutral-900/70 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-neutral-900 via-neutral-900/70 to-transparent" />
+      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
 
       {/* leve fade inferior para tirar a “linha” da base */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-neutral-900 via-neutral-900/60 to-transparent pointer-events-none" />
 
       <style>{`
         .mobile-comment-stream {
           display: flex;
           width: max-content;
+          gap: 14px;
           will-change: transform;
         }
 
@@ -310,7 +311,7 @@ function MobileComments({ comments }: { comments: Comment[] }) {
         }
 
         .animate-mobileCommentStream {
-          animation: mobileCommentStream 28s linear infinite;
+          animation: mobileCommentStream 25s linear infinite;
         }
       `}</style>
     </div>

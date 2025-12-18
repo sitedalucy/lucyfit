@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -26,14 +26,49 @@ type Comment = {
 };
 
 const COMMENTS: Comment[] = [
-  { quote: "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!", name: "Ana Paula", role: "Nutricionista" },
-  { quote: "Muito mais prático que qualquer app que você já usa. Só tire foto e pronto!", name: "Carlos Eduardo", role: "Usuário há 6 meses" },
-  { quote: "Prático, rápido e eficiente. Não consigo mais viver sem!", name: "Felipe Costa", role: "Personal Trainer" },
-  { quote: "Mudou completamente minha relação com a comida. Agora sei exatamente o que estou comendo.", name: "Júlia Oliveira", role: "Usuária há 1 ano" },
-  { quote: "O melhor investimento que fiz na minha saúde. A análise nutricional é perfeita!", name: "Rafael Santos", role: "Perdeu 8kg" },
-  { quote: "Recomendo para todos os meus alunos. A praticidade é surreal!", name: "Diego Ferreira", role: "Educador Físico" },
-  { quote: "A IA entende tudo, até quando descrevo por áudio. Incrível!", name: "Beatriz Lima", role: "Perdeu 15kg" },
-  { quote: "Nunca achei que seria tão fácil controlar minha alimentação. Estou impressionado!", name: "Camila Rodrigues", role: "Perdeu 10kg" },
+  {
+    quote: "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
+    name: "Ana Paula",
+    role: "Nutricionista",
+  },
+  {
+    quote: "Muito mais prático que qualquer app que você já usa. Só tire foto e pronto!",
+    name: "Carlos Eduardo",
+    role: "Usuário há 6 meses",
+  },
+  {
+    quote: "Prático, rápido e eficiente. Não consigo mais viver sem!",
+    name: "Felipe Costa",
+    role: "Personal Trainer",
+  },
+  {
+    quote:
+      "Mudou completamente minha relação com a comida. Agora sei exatamente o que estou comendo.",
+    name: "Júlia Oliveira",
+    role: "Usuária há 1 ano",
+  },
+  {
+    quote:
+      "O melhor investimento que fiz na minha saúde. A análise nutricional é perfeita!",
+    name: "Rafael Santos",
+    role: "Perdeu 8kg",
+  },
+  {
+    quote: "Recomendo para todos os meus alunos. A praticidade é surreal!",
+    name: "Diego Ferreira",
+    role: "Educador Físico",
+  },
+  {
+    quote: "A IA entende tudo, até quando descrevo por áudio. Incrível!",
+    name: "Beatriz Lima",
+    role: "Perdeu 15kg",
+  },
+  {
+    quote:
+      "Nunca achei que seria tão fácil controlar minha alimentação. Estou impressionado!",
+    name: "Camila Rodrigues",
+    role: "Perdeu 10kg",
+  },
 ];
 
 export default function Testimonials() {
@@ -53,8 +88,10 @@ export default function Testimonials() {
   const comments = useMemo(() => COMMENTS, []);
   const [active, setActive] = useState(0);
 
-  const prev = () => setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
-  const next = () => setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
+  const prev = () =>
+    setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
+  const next = () =>
+    setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
 
   const left = (active - 1 + videos.length) % videos.length;
   const right = (active + 1) % videos.length;
@@ -65,7 +102,6 @@ export default function Testimonials() {
       className="relative pt-14 lg:pt-24 pb-24 lg:pb-32 bg-gradient-to-b from-purple-50/30 via-neutral-900 to-black overflow-hidden"
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
-
         {/* CARD PRETO — TÍTULO */}
         <div className="relative flex justify-center z-30 mb-[-32px] lg:mb-[-48px]">
           <motion.div
@@ -89,12 +125,14 @@ export default function Testimonials() {
               Junte-se a milhares de pessoas que transformaram sua alimentação.
             </p>
 
-            {/* FADE MOBILE AJUSTADO */}
-            <div className="
-              absolute bottom-0 left-0 right-0
-              h-16 md:hidden pointer-events-none
-              bg-gradient-to-b from-black/60 via-black/30 to-transparent
-            " />
+            {/* FADE INFERIOR — MOBILE */}
+            <div
+              className="
+                absolute bottom-0 left-0 right-0
+                h-16 md:hidden pointer-events-none
+                bg-gradient-to-b from-black/70 via-black/40 to-transparent
+              "
+            />
           </motion.div>
         </div>
 
@@ -105,14 +143,28 @@ export default function Testimonials() {
           </div>
         )}
 
-        {/* COMMENTS — MOBILE (AUTOMÁTICO) */}
+        {/* COMMENTS — MOBILE (FAIXA AUTOMÁTICA) */}
         {isMobile && <MobileComments comments={comments} />}
 
         {/* VÍDEOS */}
         <div className="relative mt-6 flex justify-center items-center h-[520px] z-10">
-          <VideoCard data={videos[left]} pos="left" isMobile={isMobile} onClick={() => setActive(left)} />
-          <VideoCard data={videos[active]} pos="center" isMobile={isMobile} />
-          <VideoCard data={videos[right]} pos="right" isMobile={isMobile} onClick={() => setActive(right)} />
+          <VideoCard
+            data={videos[left]}
+            pos="left"
+            isMobile={isMobile}
+            onClick={() => setActive(left)}
+          />
+          <VideoCard
+            data={videos[active]}
+            pos="center"
+            isMobile={isMobile}
+          />
+          <VideoCard
+            data={videos[right]}
+            pos="right"
+            isMobile={isMobile}
+            onClick={() => setActive(right)}
+          />
 
           <button
             onClick={prev}
@@ -145,6 +197,7 @@ function DesktopCascadeComments({ comments }: { comments: Comment[] }) {
   return (
     <div className="relative pointer-events-none">
       <div className="relative mx-auto max-w-6xl h-[220px] overflow-hidden">
+        {/* fade inferior para integrar com o fundo */}
         <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
         <div className="lucy-comment-stream-horizontal animate-lucyCommentStreamHorizontal items-center">
@@ -183,7 +236,9 @@ function CommentCard({ c }: { c: Comment }) {
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-white font-semibold text-sm truncate">{c.name}</p>
+          <p className="text-white font-semibold text-sm truncate">
+            {c.name}
+          </p>
           <p className="text-white/60 text-xs truncate">{c.role}</p>
         </div>
 
@@ -203,7 +258,8 @@ function MobileComments({ comments }: { comments: Comment[] }) {
   const loop = [...comments, ...comments];
 
   return (
-    <div className="relative z-30 -mt-2 mb-6 overflow-hidden">
+    <div className="relative z-30 -mt-4 mb-6 overflow-hidden">
+      {/* faixa de comentários */}
       <div className="mobile-comment-stream animate-mobileCommentStream">
         {loop.map((c, idx) => (
           <div
@@ -233,6 +289,13 @@ function MobileComments({ comments }: { comments: Comment[] }) {
           </div>
         ))}
       </div>
+
+      {/* gradiente lateral para esconder o fim da faixa */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-neutral-900 via-neutral-900/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-neutral-900 via-neutral-900/70 to-transparent" />
+
+      {/* leve fade inferior para tirar a “linha” da base */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-transparent" />
 
       <style>{`
         .mobile-comment-stream {
@@ -267,42 +330,83 @@ function VideoCard({
   isMobile: boolean;
   onClick?: () => void;
 }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
   const W = isMobile ? 240 : 270;
   const H = isMobile ? 420 : 460;
   const offset = isMobile ? 150 : 320;
 
   const styles = {
     center: { transform: "translateX(0) scale(1)", zIndex: 20, opacity: 1 },
-    left: { transform: `translateX(-${offset}px) scale(0.9)`, zIndex: 10, opacity: 0.45 },
-    right: { transform: `translateX(${offset}px) scale(0.9)`, zIndex: 10, opacity: 0.45 },
+    left: {
+      transform: `translateX(-${offset}px) scale(0.9)`,
+      zIndex: 10,
+      opacity: 0.45,
+    },
+    right: {
+      transform: `translateX(${offset}px) scale(0.9)`,
+      zIndex: 10,
+      opacity: 0.45,
+    },
   } as const;
 
   const isCenter = pos === "center";
 
+  const handleClick = () => {
+    // se não é o card central, navega no carrossel
+    if (!isCenter && onClick) {
+      onClick();
+      return;
+    }
+
+    // se é o card central, controla play/pause + som
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.muted = false; // libera som após interação
+        void videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  };
+
   return (
-    <div onClick={onClick} className="absolute cursor-pointer transition-all duration-500" style={styles[pos]}>
-      <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ width: W, height: H }}>
+    <div
+      onClick={handleClick}
+      className="absolute cursor-pointer transition-all duration-500"
+      style={styles[pos]}
+    >
+      <div
+        className="rounded-3xl overflow-hidden shadow-2xl"
+        style={{ width: W, height: H }}
+      >
         <video
+          ref={videoRef}
           src={data.src}
           autoPlay={isCenter}
-          muted={!isCenter}
+          muted // sempre começa mudo; o clique libera áudio no card central
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover"
-          
         />
       </div>
 
       <div className="mt-4 text-center space-y-1">
         <p className="text-sm font-semibold text-white">
           {data.person.name},{" "}
-          <span className="text-gray-400 font-normal">{data.person.age} anos</span>
+          <span className="text-gray-400 font-normal">
+            {data.person.age} anos
+          </span>
         </p>
 
         <div className="flex justify-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+            <Star
+              key={i}
+              size={14}
+              className="fill-yellow-400 text-yellow-400"
+            />
           ))}
         </div>
       </div>

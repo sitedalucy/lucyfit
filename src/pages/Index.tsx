@@ -1,8 +1,8 @@
 // src/pages/Index.tsx
 
 import Hero from "@/components/Hero";
-import Guarantee from "@/components/Guarantee";
 import Features from "@/components/Features";
+import Guarantee from "@/components/Guarantee";
 import MoreFeatures from "@/components/MoreFeatures";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
@@ -15,11 +15,11 @@ export default function Index() {
       {/* HERO */}
       <Hero />
 
-      {/* Guarantee */}
-      <Guarantee />
-
       {/* COMO A LUCY AJUDA */}
       <Features />
+
+      {/* Guarantee */}
+      <Guarantee />
 
       {/* AINDA MAIS FUNÇÕES */}
       <MoreFeatures />

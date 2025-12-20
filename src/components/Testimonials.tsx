@@ -352,43 +352,27 @@ function VideoCard({
 
   const [playing, setPlaying] = useState(false);
 
-  // Sempre que o vídeo deixa de ser o card central, ele pausa
+  // 🔒 Ao montar, garante que o vídeo esteja pausado
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.autoplay = false;
+    v.pause();
+  }, []);
+
+  // 🔒 Sempre que NÃO for o card central, pausa e reseta o estado
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
 
     if (pos !== "center") {
       v.pause();
-      try {
-        v.currentTime = 0;
-      } catch {
-        /* ignore */
-      }
       setPlaying(false);
     }
   }, [pos]);
 
-  // Força carregar um frame para evitar tela preta (desktop e mobile)
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-
-    const handleLoaded = () => {
-      try {
-        if (v.readyState >= 2) {
-          v.currentTime = 0.1;
-        }
-      } catch {
-        /* ignore */
-      }
-    };
-
-    v.addEventListener("loadedmetadata", handleLoaded);
-    return () => v.removeEventListener("loadedmetadata", handleLoaded);
-  }, []);
-
   const handleClick = () => {
-    // se não é o card central, apenas navega
+    // Se não é o card central, apenas navega no carrossel
     if (pos !== "center" && onClick) {
       onClick();
       return;
@@ -397,11 +381,16 @@ function VideoCard({
     const v = videoRef.current;
     if (!v) return;
 
-    // central: play / pause com áudio
     if (!playing) {
       v.muted = false;
-      v.play().catch(() => {});
-      setPlaying(true);
+      v
+        .play()
+        .then(() => {
+          setPlaying(true);
+        })
+        .catch(() => {
+          // se o navegador bloquear autoplay, não faz nada
+        });
     } else {
       v.pause();
       setPlaying(false);
@@ -423,15 +412,16 @@ function VideoCard({
           src={data.src}
           loop={false}
           autoPlay={false}
-          preload={isMobile ? "none" : "metadata"}
-          poster={data.src}
+          playsInline
+          preload="metadata"
           muted={false}
           controls={false}
           className="w-full h-full object-cover"
         />
       </div>
 
-      {pos === "center" && (
+      {/* 🔘 Botão só aparece quando o vídeo NÃO está tocando */}
+      {pos === "center" && !playing && (
         <button
           className="
             absolute top-1/2 left-1/2
@@ -440,7 +430,7 @@ function VideoCard({
             rounded-full p-5
           "
         >
-          {playing ? "❚❚" : "▶"}
+          ▶
         </button>
       )}
 

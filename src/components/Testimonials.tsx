@@ -74,154 +74,154 @@ const COMMENTS: Comment[] = [
 export default function Testimonials() {
   const isMobile = useIsMobile();
 
-  // TROCA INICIAL — PRIMEIRO VÍDEO SERÁ O depo4
-  const videos = useMemo(
-    () => [
-    { src: depo4, poster: depo4, person: PEOPLE[3] },
-    { src: depo1, poster: depo1, person: PEOPLE[0] },
-    { src: depo2, poster: depo2, person: PEOPLE[1] },
-    { src: depo3, poster: depo3, person: PEOPLE[2] },
-    { src: depo5, poster: depo5, person: PEOPLE[4] },
-    ],
-    [],
-  );
+    // TROCA INICIAL — PRIMEIRO VÍDEO SERÁ O depo4
+    const videos = useMemo(
+      () => [
+      { src: depo4, poster: depo4, person: PEOPLE[3] },
+      { src: depo1, poster: depo1, person: PEOPLE[0] },
+      { src: depo2, poster: depo2, person: PEOPLE[1] },
+      { src: depo3, poster: depo3, person: PEOPLE[2] },
+      { src: depo5, poster: depo5, person: PEOPLE[4] },
+      ],
+      [],
+    );
 
-  const comments = useMemo(() => COMMENTS, []);
-  const [active, setActive] = useState(0);
+    const comments = useMemo(() => COMMENTS, []);
+    const [active, setActive] = useState(0);
 
-  const prev = () => setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
-  const next = () => setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
+    const prev = () => setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
+    const next = () => setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
 
-  const left = (active - 1 + videos.length) % videos.length;
-  const right = (active + 1) % videos.length;
+    const left = (active - 1 + videos.length) % videos.length;
+    const right = (active + 1) % videos.length;
 
-  return (
-    <section
-      id="testimonials"
-      className="
-        relative 
-        pt-14 lg:pt-24 
-        pb-24 lg:pb-32 
-        bg-gradient-to-b 
-        from-purple-50/30 
-        via-neutral-900 
-        to-black 
-        overflow-hidden
-      "
-    >
-      <div className="container mx-auto max-w-7xl px-6 relative">
-        {/* CARD PRETO — TÍTULO */}
-        <div className="relative flex justify-center z-30 mb-[-12px] lg:mb-[-48px]">
-          <motion.div
-            initial={isMobile ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="
-              relative w-full max-w-5xl rounded-3xl bg-black
-              px-6 md:px-10
-              pt-12 md:pt-20
-              pb-16 lg:pb-36
-              text-center shadow-2xl
-            "
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Não acredite somente em nós — veja quem já usa.
-            </h2>
+    return (
+      <section
+        id="testimonials"
+        className="
+          relative 
+          pt-14 lg:pt-24 
+          pb-24 lg:pb-32 
+          bg-gradient-to-b 
+          from-purple-50/30 
+          via-neutral-900 
+          to-black 
+          overflow-hidden
+        "
+      >
+        <div className="container mx-auto max-w-7xl px-6 relative">
+          {/* CARD PRETO — TÍTULO */}
+          <div className="relative flex justify-center z-30 mb-[-12px] lg:mb-[-48px]">
+            <motion.div
+              initial={isMobile ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="
+                relative w-full max-w-5xl rounded-3xl bg-black
+                px-6 md:px-10
+                pt-12 md:pt-20
+                pb-16 lg:pb-36
+                text-center shadow-2xl
+              "
+            >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                Não acredite somente em nós — veja quem já usa.
+              </h2>
 
-            <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
-              Junte-se a milhares de pessoas que transformaram sua alimentação.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* MOBILE — COMENTÁRIOS (ABAIXADO + SEM CAIXA APARENTE) */}
-        {isMobile && (
-          <div className="relative z-30 mt-4 mb-4 overflow-hidden">
-            <MobileComments comments={comments} />
+              <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
+                Junte-se a milhares de pessoas que transformaram sua alimentação.
+              </p>
+            </motion.div>
           </div>
-        )}
 
-        {/* DESKTOP — COMENTÁRIOS (INTACTO) */}
-        {!isMobile && (
-          <div className="relative z-10 pt-20">
-            <DesktopCascadeComments comments={comments} />
+          {/* MOBILE — COMENTÁRIOS (ABAIXADO + SEM CAIXA APARENTE) */}
+          {isMobile && (
+            <div className="relative z-30 mt-4 mb-4 overflow-hidden">
+              <MobileComments comments={comments} />
+            </div>
+          )}
+
+          {/* DESKTOP — COMENTÁRIOS (INTACTO) */}
+          {!isMobile && (
+            <div className="relative z-10 pt-20">
+              <DesktopCascadeComments comments={comments} />
+            </div>
+          )}
+
+          {/* VÍDEOS */}
+          <div className="relative mt-10 flex justify-center items-center h-[520px] z-10">
+            <VideoCard
+              data={videos[left]}
+              pos="left"
+              isMobile={isMobile}
+              onClick={() => setActive(left)}
+            />
+            <VideoCard
+              data={videos[active]}
+              pos="center"
+              isMobile={isMobile}
+            />
+            <VideoCard
+              data={videos[right]}
+              pos="right"
+              isMobile={isMobile}
+              onClick={() => setActive(right)}
+            />
+
+            <button
+              onClick={prev}
+              className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
+                isMobile ? "left-2 p-2" : "left-6 md:left-16 p-3"
+              }`}
+            >
+              <ChevronLeft />
+            </button>
+
+            <button
+              onClick={next}
+              className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
+                isMobile ? "right-2 p-2" : "right-6 md:right-16 p-3"
+              }`}
+            >
+              <ChevronRight />
+            </button>
           </div>
-        )}
-
-        {/* VÍDEOS */}
-        <div className="relative mt-10 flex justify-center items-center h-[520px] z-10">
-          <VideoCard
-            data={videos[left]}
-            pos="left"
-            isMobile={isMobile}
-            onClick={() => setActive(left)}
-          />
-          <VideoCard
-            data={videos[active]}
-            pos="center"
-            isMobile={isMobile}
-          />
-          <VideoCard
-            data={videos[right]}
-            pos="right"
-            isMobile={isMobile}
-            onClick={() => setActive(right)}
-          />
-
-          <button
-            onClick={prev}
-            className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
-              isMobile ? "left-2 p-2" : "left-6 md:left-16 p-3"
-            }`}
-          >
-            <ChevronLeft />
-          </button>
-
-          <button
-            onClick={next}
-            className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
-              isMobile ? "right-2 p-2" : "right-6 md:right-16 p-3"
-            }`}
-          >
-            <ChevronRight />
-          </button>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }
 
-/* ======================================================================= */
-/* MOBILE COMMENTS — ALINHADAS, MAIS BAIXAS E SEM LINHAS VISÍVEIS         */
-/* ======================================================================= */
+  /* ======================================================================= */
+  /* MOBILE COMMENTS — ALINHADAS, MAIS BAIXAS E SEM LINHAS VISÍVEIS         */
+  /* ======================================================================= */
 
-function MobileComments({ comments }: { comments: Comment[] }) {
-  const loop = [...comments, ...comments];
+  function MobileComments({ comments }: { comments: Comment[] }) {
+    const loop = [...comments, ...comments];
 
-  return (
-    <div className="relative z-30 overflow-hidden mt-0 mb-0">
-      <div className="mobile-comment-stream animate-mobileCommentStream">
-        {loop.map((c, idx) => (
-          <div
-            key={idx}
-            className="min-w-[250px] max-w-[250px] mx-2 rounded-2xl
-              border border-white/10
-              bg-white/5 backdrop-blur-md
-              px-4 py-4
-              shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
-          >
-            <p className="text-white/90 text-[13px] leading-relaxed">
-              “{c.quote}”
-            </p>
+    return (
+      <div className="relative z-30 overflow-hidden mt-0 mb-0">
+        <div className="mobile-comment-stream animate-mobileCommentStream">
+          {loop.map((c, idx) => (
+            <div
+              key={idx}
+              className="min-w-[250px] max-w-[250px] mx-2 rounded-2xl
+                border border-white/10
+                bg-white/5 backdrop-blur-md
+                px-4 py-4
+                shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+            >
+              <p className="text-white/90 text-[13px] leading-relaxed">
+                “{c.quote}”
+              </p>
 
-            <div className="mt-4 flex items-center justify-between">
-              <div>
-                <p className="text-white font-semibold text-sm truncate">
-                  {c.name}
-                </p>
-                <p className="text-white/60 text-xs truncate">{c.role}</p>
-              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <div>
+                  <p className="text-white font-semibold text-sm truncate">
+                    {c.name}
+                  </p>
+                  <p className="text-white/60 text-xs truncate">{c.role}</p>
+                </div>
 
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -333,7 +333,11 @@ function VideoCard({
   isMobile,
   onClick,
 }: {
-  data: { src: string;  person: { name: string; age: number } };
+  data: {
+  src: string;
+  poster: string;
+  person: { name: string; age: number };
+};
   pos: Pos;
   isMobile: boolean;
   onClick?: () => void;

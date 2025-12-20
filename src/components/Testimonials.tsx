@@ -421,12 +421,12 @@ function VideoCard({
         <video
           ref={videoRef}
           src={data.src}
-          loop
-          playsInline
+          loop={false}
           autoPlay={false}
-          preload="metadata"
+          preload={isMobile ? "none" : "metadata"}
           poster={data.src}
           muted={false}
+          controls={false}
           className="w-full h-full object-cover"
         />
       </div>

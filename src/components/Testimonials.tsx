@@ -333,7 +333,7 @@ function VideoCard({
   isMobile,
   onClick,
 }: {
-  data: { src: string; poster: string; person: { name: string; age: number } };
+  data: { src: string;  person: { name: string; age: number } };
   pos: Pos;
   isMobile: boolean;
   onClick?: () => void;

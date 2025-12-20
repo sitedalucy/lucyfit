@@ -333,7 +333,7 @@ function VideoCard({
   isMobile,
   onClick,
 }: {
-  data: { src: string; person: { name: string; age: number } };
+  data: { src: string; poster: string; person: { name: string; age: number } };
   pos: Pos;
   isMobile: boolean;
   onClick?: () => void;
@@ -410,6 +410,7 @@ function VideoCard({
         <video
           ref={videoRef}
           src={data.src}
+          poster={data.poster}
           loop={false}
           autoPlay={false}
           playsInline

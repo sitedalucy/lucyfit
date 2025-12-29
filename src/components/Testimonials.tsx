@@ -9,6 +9,13 @@ import depo3 from "@/assets/videos/depoimentolucy3.mp4";
 import depo4 from "@/assets/videos/depoimentolucy4.mp4";
 import depo5 from "@/assets/videos/depoimentolucy5.mp4";
 
+// POSTERS (IMAGENS)
+import poster1 from "@/assets/videos/posters/depoimentolucy1.jpg";
+import poster2 from "@/assets/videos/posters/depoimentolucy2.jpg";
+import poster3 from "@/assets/videos/posters/depoimentolucy3.jpg";
+import poster4 from "@/assets/videos/posters/depoimentolucy4.jpg";
+import poster5 from "@/assets/videos/posters/depoimentolucy5.jpg";
+
 type Pos = "left" | "center" | "right";
 
 const PEOPLE = [
@@ -78,11 +85,11 @@ export default function Testimonials() {
 
   const videos = useMemo(
     () => [
-      { src: depo4, poster: depo4, person: PEOPLE[3] },
-      { src: depo1, poster: depo1, person: PEOPLE[0] },
-      { src: depo2, poster: depo2, person: PEOPLE[1] },
-      { src: depo3, poster: depo3, person: PEOPLE[2] },
-      { src: depo5, poster: depo5, person: PEOPLE[4] },
+      { src: depo4, poster: poster4, person: PEOPLE[3] },
+      { src: depo1, poster: poster1, person: PEOPLE[0] },
+      { src: depo2, poster: poster2, person: PEOPLE[1] },
+      { src: depo3, poster: poster3, person: PEOPLE[2] },
+      { src: depo5, poster: poster5, person: PEOPLE[4] },
     ],
     []
   );
@@ -350,8 +357,16 @@ function VideoCard({
 
   const styles = {
     center: { transform: "translateX(0) scale(1)", zIndex: 20, opacity: 1 },
-    left: { transform: `translateX(-${offset}px) scale(0.9)`, opacity: 0.85, zIndex: 10 },
-    right: { transform: `translateX(${offset}px) scale(0.9)`, opacity: 0.85, zIndex: 10 },
+    left: {
+      transform: `translateX(-${offset}px) scale(0.9)`,
+      opacity: 0.85,
+      zIndex: 10,
+    },
+    right: {
+      transform: `translateX(${offset}px) scale(0.9)`,
+      opacity: 0.85,
+      zIndex: 10,
+    },
   } as const;
 
   const [playing, setPlaying] = useState(false);
@@ -439,21 +454,25 @@ function VideoCard({
 
       {/* Botão Play/Pause — só aparece no central */}
       {pos === "center" && !playing && (
-        <button className="
+        <button
+          className="
           absolute top-1/2 left-1/2
           -translate-x-1/2 -translate-y-1/2
           bg-black/70 text-white rounded-full p-4
-        ">
+        "
+        >
           ▶
         </button>
       )}
 
       {pos === "center" && playing && (
-        <button className="
+        <button
+          className="
           absolute top-1/2 left-1/2
           -translate-x-1/2 -translate-y-1/2
           bg-black/70 text-white rounded-full p-4
-        ">
+        "
+        >
           ❚❚
         </button>
       )}
@@ -462,12 +481,18 @@ function VideoCard({
       <div className="mt-4 text-center space-y-1">
         <p className="text-sm font-semibold text-white">
           {data.person.name},{" "}
-          <span className="text-gray-400 font-normal">{data.person.age} anos</span>
+          <span className="text-gray-400 font-normal">
+            {data.person.age} anos
+          </span>
         </p>
 
         <div className="flex justify-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+            <Star
+              key={i}
+              size={14}
+              className="fill-yellow-400 text-yellow-400"
+            />
           ))}
         </div>
       </div>

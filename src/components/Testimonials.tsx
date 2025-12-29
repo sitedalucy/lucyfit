@@ -415,18 +415,20 @@ function VideoCard({
       style={styles[pos]}
     >
       <video
-        key={data.src} // 🔑 força recarregar ao trocar de vídeo
+        key={data.src}
         ref={videoRef}
         src={data.src}
         poster={data.poster}
-        preload={pos === "center" ? "auto" : "metadata"} // ⚡ carrega rápido somente o central
+        preload={pos === "center" ? "auto" : "metadata"}
         playsInline
         autoPlay={false}
         muted={false}
         controls={false}
         loop={false}
-        className="w-full h-full object-cover"
-        style={{ pointerEvents: "none" }} // 🚫 evita clique errado no mobile
+        className="block w-full h-full object-cover" // 👈 block impede bug de dimensionamento
+        style={{
+          pointerEvents: pos === "center" ? "auto" : "none", // 👈 só no central pode clicar
+        }}
       />
 
       {/* BOTÃO PLAY/PAUSE SOMENTE NO CENTRAL */}

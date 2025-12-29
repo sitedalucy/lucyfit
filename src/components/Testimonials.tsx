@@ -27,12 +27,14 @@ type Comment = {
 
 const COMMENTS: Comment[] = [
   {
-    quote: "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
+    quote:
+      "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
     name: "Ana Paula",
     role: "Nutricionista",
   },
   {
-    quote: "Muito mais prático que qualquer app que você já usa. Só tire foto e pronto!",
+    quote:
+      "Muito mais prático que qualquer app que você já usa. Só tire foto e pronto!",
     name: "Carlos Eduardo",
     role: "Usuário há 6 meses",
   },
@@ -48,7 +50,8 @@ const COMMENTS: Comment[] = [
     role: "Usuária há 1 ano",
   },
   {
-    quote: "O melhor investimento que fiz na minha saúde. A análise nutricional é perfeita!",
+    quote:
+      "O melhor investimento que fiz na minha saúde. A análise nutricional é perfeita!",
     name: "Rafael Santos",
     role: "Perdeu 8kg",
   },
@@ -81,7 +84,7 @@ export default function Testimonials() {
       { src: depo3, poster: depo3, person: PEOPLE[2] },
       { src: depo5, poster: depo5, person: PEOPLE[4] },
     ],
-    [],
+    []
   );
 
   const comments = useMemo(() => COMMENTS, []);
@@ -108,7 +111,6 @@ export default function Testimonials() {
       "
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
-
         <div className="relative flex justify-center z-30 mb-[-12px] lg:mb-[-48px]">
           <motion.div
             initial={isMobile ? false : { opacity: 0, y: 24 }}
@@ -151,11 +153,7 @@ export default function Testimonials() {
             isMobile={isMobile}
             onClick={() => setActive(left)}
           />
-          <VideoCard
-            data={videos[active]}
-            pos="center"
-            isMobile={isMobile}
-          />
+          <VideoCard data={videos[active]} pos="center" isMobile={isMobile} />
           <VideoCard
             data={videos[right]}
             pos="right"
@@ -217,7 +215,11 @@ function MobileComments({ comments }: { comments: Comment[] }) {
 
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={12} className="fill-yellow-400 text-yellow-400" />
+                  <Star
+                    key={i}
+                    size={12}
+                    className="fill-yellow-400 text-yellow-400"
+                  />
                 ))}
               </div>
             </div>
@@ -296,15 +298,17 @@ function CommentCard({ c }: { c: Comment }) {
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-white font-semibold text-sm truncate">
-            {c.name}
-          </p>
+          <p className="text-white font-semibold text-sm truncate">{c.name}</p>
           <p className="text-white/60 text-xs truncate">{c.role}</p>
         </div>
 
         <div className="flex shrink-0 gap-0.5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} size={13} className="fill-yellow-400 text-yellow-400" />
+            <Star
+              key={i}
+              size={13}
+              className="fill-yellow-400 text-yellow-400"
+            />
           ))}
         </div>
       </div>
@@ -337,8 +341,16 @@ function VideoCard({
 
   const styles = {
     center: { transform: "translateX(0) scale(1)", zIndex: 20, opacity: 1 },
-    left: { transform: `translateX(-${offset}px) scale(0.9)`, zIndex: 10, opacity: 1 },
-    right: { transform: `translateX(${offset}px) scale(0.9)`, zIndex: 10, opacity: 1 },
+    left: {
+      transform: `translateX(-${offset}px) scale(0.9)`,
+      zIndex: 10,
+      opacity: 1,
+    },
+    right: {
+      transform: `translateX(${offset}px) scale(0.9)`,
+      zIndex: 10,
+      opacity: 1,
+    },
   } as const;
 
   const [playing, setPlaying] = useState(false);
@@ -356,21 +368,26 @@ function VideoCard({
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (pos !== "center") {
-      v.pause();
-      v.currentTime = 0.1;
-      setPlaying(false);
-    }
-  }, [pos]);
+    v.pause();
+    setPlaying(false);
+
+    // força carregar o primeiro frame SEM autoplay
+    const handleLoaded = () => {
+      if (v.readyState >= 2) v.pause();
+    };
+
+    v.addEventListener("loadeddata", handleLoaded);
+    return () => v.removeEventListener("loadeddata", handleLoaded);
+  }, []);
 
   // 🎬 Clique → play/pause APENAS no central
   const handleClick = () => {
     const v = videoRef.current;
     if (!v) return;
 
-    if (pos !== "center" && onClick) {
-      onClick();
-      return;
+    if (pos !== "center") {
+      v.pause();
+      setPlaying(false);
     }
 
     if (!playing) {
@@ -393,15 +410,14 @@ function VideoCard({
         style={{ width, height }}
       >
         <video
+          key={data.src} // 🔑 força recarregar ao trocar de vídeo
           ref={videoRef}
           src={data.src}
           poster={data.poster}
           preload="metadata"
-          muted={false}
-          autoPlay={false}
           playsInline
+          muted={false}
           controls={false}
-          loop={false}
           className="w-full h-full object-cover"
         />
       </div>

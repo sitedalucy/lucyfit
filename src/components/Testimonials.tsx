@@ -414,6 +414,12 @@ function VideoCard({
       className="absolute cursor-pointer transition-all duration-300"
       style={styles[pos]}
     >
+      <div
+        className="rounded-3xl overflow-hidden shadow-2xl bg-black"
+        style={{ width, height }}
+      >
+
+      </div>
       <video
         key={data.src}
         ref={videoRef}

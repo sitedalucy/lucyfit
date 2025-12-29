@@ -148,13 +148,22 @@ export default function Testimonials() {
 
         <div className="relative mt-10 flex justify-center items-center h-[520px] z-10">
           <VideoCard
+            key={`left-${left}-${videos[left].src}`}
             data={videos[left]}
             pos="left"
             isMobile={isMobile}
             onClick={() => setActive(left)}
           />
-          <VideoCard data={videos[active]} pos="center" isMobile={isMobile} />
+
           <VideoCard
+            key={`center-${active}-${videos[active].src}`}
+            data={videos[active]}
+            pos="center"
+            isMobile={isMobile}
+          />
+
+          <VideoCard
+            key={`right-${right}-${videos[right].src}`}
             data={videos[right]}
             pos="right"
             isMobile={isMobile}

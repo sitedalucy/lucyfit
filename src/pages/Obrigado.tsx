@@ -4,6 +4,15 @@ export default function Obrigado() {
   return (
     <main className="bg-gray-50 min-h-screen py-16 px-4">
       <div className="max-w-4xl mx-auto space-y-12">
+        {/* Imagem no topo */}
+        <div className="text-center">
+          <img
+            src="/images/logotipo.png" // Substitua pelo caminho correto da imagem
+            alt="Imagem de obrigado"
+            className="max-w-sm h-auto mx-auto rounded-lg shadow-lg"
+          />
+        </div>
+
         {/* Compra confirmada */}
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
@@ -14,7 +23,7 @@ export default function Obrigado() {
         {/* Bem-vinda à Lucy Fit */}
         <div className="text-center">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-            <span className="text-green-500">Bem-vinda</span> à Lucy Fit 💚💖
+            <span className="text-green-500">Bem-vinda</span> à Lucy Fit 💚💜
           </h1>
         </div>
 
@@ -92,7 +101,7 @@ export default function Obrigado() {
         {/* Nos vemos no WhatsApp */}
         <div className="text-center">
           <h3 className="text-xl md:text-2xl font-bold text-gray-800">
-            💚💖 Nos vemos no WhatsApp
+            💚💜 Nos vemos no WhatsApp
           </h3>
         </div>
 

@@ -77,7 +77,7 @@ export default function FAQ() {
             </h2>
 
             <p className="text-gray-600 max-w-xl mx-auto">
-              Tudo o que você precisa saber antes de começar a usar a LucyFit.
+              Tudo o que você precisa saber antes de começar a usar a LucyFit
             </p>
           </motion.div>
         )}

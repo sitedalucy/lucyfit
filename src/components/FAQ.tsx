@@ -47,7 +47,7 @@ export default function FAQ() {
     >
       <div className="container mx-auto px-6 max-w-4xl">
 
-        {/* 🔥 HEADER — SEMPRE VISÍVEL */}
+        {/* HEADER */}
         {isMobile ? (
           <div className="text-center mb-10 lg:mb-14 space-y-4">
             <div className="inline-flex items-center gap-3 rounded-full bg-purple-50 px-5 py-1.5 shadow-sm">
@@ -82,7 +82,7 @@ export default function FAQ() {
           </motion.div>
         )}
 
-        {/* ACCORDION */}
+        {/* */}
         <Accordion type="single" collapsible className="space-y-5">
           {faqs.map((faq, index) => (
             <AccordionItem

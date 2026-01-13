@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-white to-purple-50 pt-12 lg:pt-16 pb-12 mt-16 border-t border-purple-100/40">
       <div className="container mx-auto px-6 max-w-7xl">
-        {/* TOP GRID */}
+        {/* GRID */}
         <div className="grid md:grid-cols-4 gap-12 mb-16">
-          {/* LOGO + DESCRIPTION */}
+          {/* LOGO E DESCRIÇÃO */}
           <div>
             <img
               src={lucyLogo}
@@ -22,7 +22,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* PRODUCT */}
+          {/* PRODUTO */}
           <div>
             <h4 className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide">
               PRODUTO
@@ -47,7 +47,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COMPANY */}
+          {/* EMPRESA */}
           <div>
             <h4 className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide">
               EMPRESA
@@ -80,7 +80,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* LEGAL */}
+          {/* POLITICA DE PRIVACIDADE */}
           <div>
             <h4 className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide">
               LEGAL
@@ -107,7 +107,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ADDRESS */}
+        {/* ENDERECO */}
         <div className="border-t border-purple-100 pt-4 pb-4 mb-4 text-sm text-gray-500">
           <p>
             Av. Queiroz Filho, 1700 - Alto de Pinheiros, São Paulo - SP,
@@ -115,7 +115,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* BOTTOM BAR */}
+        {/* RODAPÉ */}
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
           <p>© 2025 LucyFit. Todos os direitos reservados.</p>
 

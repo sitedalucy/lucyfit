@@ -43,13 +43,13 @@ function FeatureCard({
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
 
-  // ✅ HOOK SEMPRE CHAMADO (REGRA DO REACT RESPEITADA)
+
   const isInView = useInView(ref, {
     margin: "-30% 0px -30% 0px",
   });
 
   useEffect(() => {
-    // ✅ NO MOBILE, IGNORAMOS COMPLETAMENTE O INVIEW
+  
     if (!isMobile && isInView) {
       setActiveIndex(index);
     }
@@ -71,7 +71,7 @@ function FeatureCard({
       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
       <p className="text-gray-600 text-sm leading-relaxed">{item.text}</p>
 
-      {/* MOBILE — GIF PURO */}
+      {/* GIF PURO */}
       {isMobile && (
         <div className="mt-5 flex justify-center">
           <img
@@ -91,7 +91,7 @@ function FeatureCard({
         Assine agora →
       </a>
 
-      {/* BARRA PREMIUM — DESKTOP */}
+      {/* BARRA DESKTOP */}
       {!isMobile && isActive && (
         <div className="mt-5 h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
           <div className="h-full w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500" />
@@ -135,7 +135,7 @@ export default function Features() {
             ))}
           </div>
 
-          {/* DESKTOP — STICKY PREMIUM */}
+          {/* DESKTOP  */}
           {!isMobile && (
             <div className="sticky top-32">
               <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-200 bg-purple-50/40">

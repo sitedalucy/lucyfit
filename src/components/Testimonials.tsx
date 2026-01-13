@@ -372,7 +372,7 @@ function VideoCard({
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // 👉 Quando não está no centro → pausa e mostra a imagem
+
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
@@ -385,7 +385,7 @@ function VideoCard({
   }, [pos]);
 
   const handleClick = () => {
-    // 👉 Se o card não for o central → só muda o ativo
+
     if (pos !== "center") {
       onClick?.();
       return;
@@ -394,7 +394,7 @@ function VideoCard({
     const v = videoRef.current;
     if (!v) return;
 
-    // 👉 Primeiro clique: carrega o vídeo e inicia
+
     if (!loaded) {
       v.src = data.src;
       v.load();
@@ -406,7 +406,7 @@ function VideoCard({
       return;
     }
 
-    // 👉 Se já carregou: play/pause
+
     if (playing) {
       v.pause();
       setPlaying(false);
@@ -426,7 +426,7 @@ function VideoCard({
         className="rounded-3xl overflow-hidden shadow-2xl bg-black relative"
         style={{ width, height }}
       >
-        {/* POSTER 😍 Sempre exibe imagem até carregar */}
+        {/* POSTER */}
         {(!loaded || pos !== "center") && (
           <img
             src={data.poster}
@@ -436,7 +436,7 @@ function VideoCard({
           />
         )}
 
-        {/* VÍDEO — só exibe em cards centrais e após clicar */}
+        {/* VÍDEO  */}
         {pos === "center" && (
           <video
             ref={videoRef}
@@ -452,7 +452,7 @@ function VideoCard({
         )}
       </div>
 
-      {/* Botão Play/Pause — só aparece no central */}
+      {/* Botão Play/Pause  */}
       {pos === "center" && !playing && (
         <button
           className="

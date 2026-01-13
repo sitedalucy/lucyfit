@@ -5,12 +5,12 @@ export default function Guarantee() {
       {/* ================= GARANTIA 30 DIAS ================= */}
       <div className="py-12 lg:py-20 px-4">
         <div className="relative mx-auto max-w-6xl rounded-3xl border border-purple-200 bg-gradient-to-br from-purple-50/40 via-white to-purple-50/30 shadow-2xl px-6 py-12 lg:px-12 lg:py-16 overflow-hidden">
-          {/* DECOR DESKTOP */}
+          {/* DESKTOP */}
           <div className="hidden lg:block absolute -top-24 -left-24 w-96 h-96 bg-purple-300/20 rounded-full blur-[140px]" />
           <div className="hidden lg:block absolute -bottom-24 -right-24 w-96 h-96 bg-pink-300/20 rounded-full blur-[140px]" />
 
           <div className="relative grid lg:grid-cols-2 gap-10 items-center">
-            {/* TEXTO */}
+            {/* TEXTO VERSÃO DESKTOP */}
             <div className="space-y-4 text-center lg:text-left">
               <h3 className="text-2xl lg:text-4xl font-bold">
                 <span className="text-purple-600">Experimente a Lucy Fit</span>{" "}
@@ -46,7 +46,7 @@ export default function Guarantee() {
               </div>
             </div>
 
-            {/* MOEDA REAL */}
+            {/* CARD NOVO */}
             <div className="flex justify-center">
               <div className="w-44 h-44 lg:w-56 lg:h-56">
                 <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -76,7 +76,7 @@ export default function Guarantee() {
                     </radialGradient>
                   </defs>
 
-                  {/* TEXTO CURVO SUPERIOR */}
+                  {/* TEXTO SUPERIOR */}
                   <text
                     fontSize="10"
                     fill="#4b5563"
@@ -92,7 +92,7 @@ export default function Guarantee() {
                     </textPath>
                   </text>
 
-                  {/* TEXTO CURVO INFERIOR */}
+                  {/* TEXTO INFERIOR */}
                   <text
                     fontSize="10"
                     fill="#4b5563"
@@ -144,7 +144,7 @@ export default function Guarantee() {
           </div>
         </div>
       </div>
-      {/* ================= FIM GARANTIA ================= */}
+      {/* ================= FIM ================= */}
     </section>
   );
 }

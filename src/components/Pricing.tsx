@@ -89,7 +89,7 @@ export default function Pricing() {
           px-6
         "
       >
-        {/* 🟥 CARD MENSAL — ESQUERDA */}
+        {/* CARD MENSAL  */}
         <motion.div
           initial={isMobile ? false : { opacity: 0, y: 60, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -162,7 +162,7 @@ export default function Pricing() {
           </a>
         </motion.div>
 
-        {/* 🟪 CARD ANUAL — DIREITA */}
+        {/* CARD ANUAL */}
         <motion.div
           initial={isMobile ? false : { opacity: 0, y: 60, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}

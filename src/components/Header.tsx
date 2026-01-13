@@ -28,7 +28,7 @@ export default function Header() {
             />
           </button>
 
-          {/* DESKTOP MENU */}
+          {/* MENU */}
           <nav className="hidden lg:flex items-center gap-10 text-sm font-medium">
             <button onClick={() => scrollToSection("features")}>Funcionalidades</button>
             <button onClick={() => scrollToSection("how-it-works")}>Como funciona</button>
@@ -43,13 +43,13 @@ export default function Header() {
             </Button>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MENU MOBILE */}
           <button className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <Menu className="h-6 w-6" />
           </button>
         </div>
 
-        {/* MOBILE MENU */}
+        {/* MENU MOBILE */}
         {mobileMenuOpen && (
           <div className="lg:hidden space-y-4 py-4">
             <button onClick={() => scrollToSection("features")} className="block w-full py-2">

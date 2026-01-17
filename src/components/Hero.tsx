@@ -48,10 +48,7 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Uma assistente fitness no WhatsApp pra te ajudar a ficar em forma{" "}
-            <span className="inline-flex items-center px-4 py-2 bg-white rounded-2xl shadow-md">
-              <img src={lucyLogo} className="h-9" alt="LucyFit" />
-            </span>
+            Uma assistente fitness no WhatsApp pra te ajudar a ficar em forma
           </h1>
 
           <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">

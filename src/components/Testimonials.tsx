@@ -1,125 +1,501 @@
-// src/components/Testimonials.tsx
+import { useMemo, useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+import depo1 from "@/assets/videos/depoimentolucy1.mp4";
+import depo2 from "@/assets/videos/depoimentolucy2.mp4";
+import depo3 from "@/assets/videos/depoimentolucy3.mp4";
+import depo4 from "@/assets/videos/depoimentolucy4.mp4";
+import depo5 from "@/assets/videos/depoimentolucy5.mp4";
+
+// POSTERS (IMAGENS)
+import poster1 from "@/assets/videos/posters/depoimentolucy1.jpg";
+import poster2 from "@/assets/videos/posters/depoimentolucy2.jpg";
+import poster3 from "@/assets/videos/posters/depoimentolucy3.jpg";
+import poster4 from "@/assets/videos/posters/depoimentolucy4.jpg";
+import poster5 from "@/assets/videos/posters/depoimentolucy5.jpg";
+
+type Pos = "left" | "center" | "right";
+
+const PEOPLE = [
+  { name: "Natalia", age: 30 },
+  { name: "Adrielly", age: 24 },
+  { name: "Amanda", age: 27 },
+  { name: "Luanna", age: 34 },
+  { name: "Gabriela", age: 26 },
+];
+
+type Comment = {
+  quote: string;
+  name: string;
+  role: string;
+};
+
+const COMMENTS: Comment[] = [
+  {
+    quote:
+      "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
+    name: "Ana Paula",
+    role: "Nutricionista",
+  },
+  {
+    quote:
+      "Muito mais prático que qualquer app que você já usa. Só tire foto e pronto!",
+    name: "Carlos Eduardo",
+    role: "Usuário há 6 meses",
+  },
+  {
+    quote: "Prático, rápido e eficiente. Não consigo mais viver sem!",
+    name: "Felipe Costa",
+    role: "Personal Trainer",
+  },
+  {
+    quote:
+      "Mudou completamente minha relação com a comida. Agora sei exatamente o que estou comendo.",
+    name: "Júlia Oliveira",
+    role: "Usuária há 1 ano",
+  },
+  {
+    quote:
+      "O melhor investimento que fiz na minha saúde. A análise nutricional é perfeita!",
+    name: "Rafael Santos",
+    role: "Perdeu 8kg",
+  },
+  {
+    quote: "Recomendo para todos os meus alunos. A praticidade é surreal!",
+    name: "Diego Ferreira",
+    role: "Educador Físico",
+  },
+  {
+    quote: "A IA entende tudo, até quando descrevo por áudio. Incrível!",
+    name: "Beatriz Lima",
+    role: "Perdeu 15kg",
+  },
+  {
+    quote:
+      "Nunca achei que seria tão fácil controlar minha alimentação. Estou impressionado!",
+    name: "Camila Rodrigues",
+    role: "Perdeu 10kg",
+  },
+];
 
 export default function Testimonials() {
   const isMobile = useIsMobile();
 
-  const testimonials = [
-    {
-      text: "Perdi 12kg em 3 meses! A I.A me ajudou a entender minha alimentação de verdade.",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
-      name: "Mariana Silva",
-      role: "Perdeu 12kg",
-    },
-    {
-      text: "Muito mais prático que qualquer app que já usei. Só tirar foto e pronto!",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop",
-      name: "Carlos Eduardo",
-      role: "Usuário há 6 meses",
-    },
-    {
-      text: "Finalmente consigo manter minha dieta sem estresse. Recomendo demais!",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop",
-      name: "Ana Paula",
-      role: "Nutricionista",
-    },
-    {
-      text: "Mudou completamente minha relação com a comida.",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop",
-      name: "Julia Oliveira",
-      role: "Usuária há 1 ano",
-    },
-    {
-      text: "O melhor investimento que fiz na minha saúde.",
-      image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop",
-      name: "Rafael Santos",
-      role: "Perdeu 8kg",
-    },
-    {
-      text: "A I.A entende tudo, até quando mando áudio.",
-      image:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop",
-      name: "Beatriz Lima",
-      role: "Perdeu 15kg",
-    },
-    {
-      text: "Nunca consegui manter constância com dieta. Com a LucyFit ficou simples, é só mandar mensagem no WhatsApp.",
-      image:
-        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop",
-      name: "Lucas Almeida",
-      role: "Usuário há 4 meses",
-    },
-    {
-      text: "Mais do que emagrecer, aprendi a comer melhor. A LucyFit me fez prestar atenção no que eu realmente consumo.",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2d?w=120&h=120&fit=crop",
-      name: "Patrícia Rocha",
-      role: "Mudou hábitos alimentares",
-    },
-  ];
+  const videos = useMemo(
+    () => [
+      { src: depo4, poster: poster4, person: PEOPLE[3] },
+      { src: depo1, poster: poster1, person: PEOPLE[0] },
+      { src: depo2, poster: poster2, person: PEOPLE[1] },
+      { src: depo3, poster: poster3, person: PEOPLE[2] },
+      { src: depo5, poster: poster5, person: PEOPLE[4] },
+    ],
+    []
+  );
 
-  // 📱 Mobile: 5 depoimentos em UMA coluna (leve + rico)
-  const mobileTestimonials = testimonials.slice(0, 5);
+  const comments = useMemo(() => COMMENTS, []);
+  const [active, setActive] = useState(0);
 
-  // 🖥 Desktop: 3 colunas
-  const firstColumn = testimonials.slice(0, 2);
-  const secondColumn = testimonials.slice(2, 4);
-  const thirdColumn = testimonials.slice(4, 6);
+  const prev = () => setActive((i) => (i === 0 ? videos.length - 1 : i - 1));
+  const next = () => setActive((i) => (i === videos.length - 1 ? 0 : i + 1));
+
+  const left = (active - 1 + videos.length) % videos.length;
+  const right = (active + 1) % videos.length;
 
   return (
     <section
       id="testimonials"
-      className="relative py-32 bg-gradient-to-b from-purple-50/40 to-white overflow-hidden"
+      className="
+        relative 
+        pt-14 lg:pt-24 
+        pb-24 lg:pb-32 
+        bg-gradient-to-b 
+        from-purple-50/30 
+        via-neutral-900 
+        to-black 
+        overflow-hidden
+      "
     >
       <div className="container mx-auto max-w-7xl px-6 relative">
-        {/* CARD PRETO */}
-        <div className="relative flex justify-center mb-[-160px] z-10">
+        <div className="relative flex justify-center z-30 mb-[-12px] lg:mb-[-48px]">
           <motion.div
             initial={isMobile ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-5xl rounded-3xl bg-black px-10 pt-14 pb-40 text-center shadow-2xl"
+            className="
+              relative w-full max-w-5xl rounded-3xl bg-black
+              px-6 md:px-10
+              pt-12 md:pt-20
+              pb-16 lg:pb-36
+              text-center shadow-2xl
+            "
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Não acredite somente em nós — veja quem já usa.
             </h2>
-
             <p className="mt-5 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
               Junte-se a milhares de pessoas que transformaram sua alimentação.
             </p>
           </motion.div>
         </div>
 
-        {/* CARROSSEL */}
-        <div
-          className={`
-            relative z-20 flex justify-center gap-6 max-h-[520px] overflow-hidden
-            ${
-              !isMobile
-                ? "[mask-image:linear-gradient(to_bottom,transparent,black_25%,black_55%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_25%,black_55%,transparent)]"
-                : ""
-            }
-          `}
-        >
-          {isMobile ? (
-            <TestimonialsColumn testimonials={mobileTestimonials} duration={18} />
-          ) : (
-            <>
-              <TestimonialsColumn testimonials={firstColumn} duration={16} />
-              <TestimonialsColumn testimonials={secondColumn} duration={20} />
-              <TestimonialsColumn testimonials={thirdColumn} duration={18} />
-            </>
-          )}
+        {isMobile && (
+          <div className="relative z-30 mt-4 mb-4 overflow-hidden">
+            <MobileComments comments={comments} />
+          </div>
+        )}
+
+        {!isMobile && (
+          <div className="relative z-10 pt-20">
+            <DesktopCascadeComments comments={comments} />
+          </div>
+        )}
+
+        <div className="relative mt-10 flex justify-center items-center h-[520px] z-10">
+          <VideoCard
+            key={`left-${left}-${videos[left].src}`}
+            data={videos[left]}
+            pos="left"
+            isMobile={isMobile}
+            onClick={() => setActive(left)}
+          />
+
+          <VideoCard
+            key={`center-${active}-${videos[active].src}`}
+            data={videos[active]}
+            pos="center"
+            isMobile={isMobile}
+          />
+
+          <VideoCard
+            key={`right-${right}-${videos[right].src}`}
+            data={videos[right]}
+            pos="right"
+            isMobile={isMobile}
+            onClick={() => setActive(right)}
+          />
+
+          <button
+            onClick={prev}
+            className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
+              isMobile ? "left-2 p-2" : "left-6 md:left-16 p-3"
+            }`}
+          >
+            <ChevronLeft />
+          </button>
+
+          <button
+            onClick={next}
+            className={`absolute z-30 rounded-full bg-white/90 shadow-md hover:bg-white transition ${
+              isMobile ? "right-2 p-2" : "right-6 md:right-16 p-3"
+            }`}
+          >
+            <ChevronRight />
+          </button>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ====================== MOBILE COMMENTS ====================== */
+
+function MobileComments({ comments }: { comments: Comment[] }) {
+  const loop = [...comments, ...comments];
+
+  return (
+    <div className="relative z-30 overflow-hidden mt-0 mb-0">
+      <div className="mobile-comment-stream animate-mobileCommentStream">
+        {loop.map((c, idx) => (
+          <div
+            key={idx}
+            className="min-w-[250px] max-w-[250px] mx-2 rounded-2xl
+              border border-white/10
+              bg-white/5 backdrop-blur-md
+              px-4 py-4
+              shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+          >
+            <p className="text-white/90 text-[13px] leading-relaxed">
+              “{c.quote}”
+            </p>
+
+            <div className="mt-4 flex items-center justify-between">
+              <div>
+                <p className="text-white font-semibold text-sm truncate">
+                  {c.name}
+                </p>
+                <p className="text-white/60 text-xs truncate">{c.role}</p>
+              </div>
+
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    size={12}
+                    className="fill-yellow-400 text-yellow-400"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-neutral-700 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-neutral-700 via-neutral-900/60 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-neutral-700 via-neutral-900/60 to-transparent pointer-events-none" />
+
+      <style>{`
+        .mobile-comment-stream {
+          display: flex;
+          width: max-content;
+          gap: 10px;
+          will-change: transform;
+        }
+
+        @keyframes mobileCommentStream {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .animate-mobileCommentStream {
+          animation: mobileCommentStream 23s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ====================== DESKTOP COMMENTS ====================== */
+
+function DesktopCascadeComments({ comments }: { comments: Comment[] }) {
+  const loop = useMemo(() => [...comments, ...comments], [comments]);
+
+  return (
+    <div className="relative pointer-events-none">
+      <div className="relative mx-auto max-w-6xl h-[220px] overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
+
+        <div className="lucy-comment-stream-horizontal animate-lucyCommentStreamHorizontal items-center">
+          {loop.map((c, idx) => (
+            <CommentCard key={idx} c={c} />
+          ))}
+        </div>
+
+        <style>{`
+          .lucy-comment-stream-horizontal {
+            display: flex;
+            gap: 28px;
+            will-change: transform;
+          }
+
+          @keyframes lucyCommentStreamHorizontal {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+
+          .animate-lucyCommentStreamHorizontal {
+            animation: lucyCommentStreamHorizontal 36s linear infinite;
+          }
+        `}</style>
+      </div>
+    </div>
+  );
+}
+
+function CommentCard({ c }: { c: Comment }) {
+  return (
+    <div className="w-[420px] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_18px_50px_rgba(0,0,0,0.35)] p-5">
+      <p className="text-white/90 text-sm leading-relaxed line-clamp-4">
+        “{c.quote}”
+      </p>
+
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p className="text-white font-semibold text-sm truncate">{c.name}</p>
+          <p className="text-white/60 text-xs truncate">{c.role}</p>
+        </div>
+
+        <div className="flex shrink-0 gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              size={13}
+              className="fill-yellow-400 text-yellow-400"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ====================== VIDEO CARDS ====================== */
+
+function VideoCard({
+  data,
+  pos,
+  isMobile,
+  onClick,
+}: {
+  data: {
+    src: string;
+    poster: string;
+    person: { name: string; age: number };
+  };
+  pos: Pos;
+  isMobile: boolean;
+  onClick?: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const width = isMobile ? 240 : 270;
+  const height = isMobile ? 420 : 460;
+  const offset = isMobile ? 150 : 320;
+
+  const styles = {
+    center: { transform: "translateX(0) scale(1)", zIndex: 20, opacity: 1 },
+    left: {
+      transform: `translateX(-${offset}px) scale(0.9)`,
+      opacity: 0.85,
+      zIndex: 10,
+    },
+    right: {
+      transform: `translateX(${offset}px) scale(0.9)`,
+      opacity: 0.85,
+      zIndex: 10,
+    },
+  } as const;
+
+  const [playing, setPlaying] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    if (pos !== "center") {
+      v.pause();
+      setPlaying(false);
+      setLoaded(false);
+    }
+  }, [pos]);
+
+  const handleClick = () => {
+
+    if (pos !== "center") {
+      onClick?.();
+      return;
+    }
+
+    const v = videoRef.current;
+    if (!v) return;
+
+
+    if (!loaded) {
+      v.src = data.src;
+      v.load();
+      v.muted = false;
+      v.play().then(() => {
+        setLoaded(true);
+        setPlaying(true);
+      });
+      return;
+    }
+
+
+    if (playing) {
+      v.pause();
+      setPlaying(false);
+    } else {
+      v.play();
+      setPlaying(true);
+    }
+  };
+
+  return (
+    <div
+      onClick={handleClick}
+      className="absolute cursor-pointer transition-all duration-300"
+      style={styles[pos]}
+    >
+      <div
+        className="rounded-3xl overflow-hidden shadow-2xl bg-black relative"
+        style={{ width, height }}
+      >
+        {/* POSTER */}
+        {(!loaded || pos !== "center") && (
+          <img
+            src={data.poster}
+            alt="poster"
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            draggable={false}
+          />
+        )}
+
+        {/* VÍDEO  */}
+        {pos === "center" && (
+          <video
+            ref={videoRef}
+            playsInline
+            preload="none"
+            autoPlay={false}
+            loop={false}
+            muted={false}
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+              loaded ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          />
+        )}
+      </div>
+
+      {/* Botão Play/Pause  */}
+      {pos === "center" && !playing && (
+        <button
+          className="
+          absolute top-1/2 left-1/2
+          -translate-x-1/2 -translate-y-1/2
+          bg-black/70 text-white rounded-full p-4
+        "
+        >
+          ▶
+        </button>
+      )}
+
+      {pos === "center" && playing && (
+        <button
+          className="
+          absolute top-1/2 left-1/2
+          -translate-x-1/2 -translate-y-1/2
+          bg-black/70 text-white rounded-full p-4
+        "
+        >
+          ❚❚
+        </button>
+      )}
+
+      {/* Nome + Estrelas */}
+      <div className="mt-4 text-center space-y-1">
+        <p className="text-sm font-semibold text-white">
+          {data.person.name},{" "}
+          <span className="text-gray-400 font-normal">
+            {data.person.age} anos
+          </span>
+        </p>
+
+        <div className="flex justify-center gap-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              size={14}
+              className="fill-yellow-400 text-yellow-400"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

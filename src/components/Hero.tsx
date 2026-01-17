@@ -1,7 +1,6 @@
 // src/components/Hero.tsx
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
 import heroGif from "@/assets/gifs/meal-animation.gif";
 import lucyLogo from "@/assets/images/lucy-logo.png";
 import { Button } from "@/components/ui/button";
@@ -11,33 +10,18 @@ const Hero = () => {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // 🔹 Controla quando o GIF aparece no mobile (performance)
-  const [showGif, setShowGif] = useState<boolean>(!isMobile);
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const timeoutId = setTimeout(() => {
-      setShowGif(true);
-    }, 1200);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isMobile]);
-
   return (
-    <section className="relative overflow-hidden pt-24 pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
-      {/* MOBILE HOME BUTTON */}
+    <section className="relative overflow-hidden pt-20 pb-20 lg:pt-24 lg:pb-28 bg-gradient-to-b from-white via-purple-50/40 to-white">
+      {/* LOGO MOBILE */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Voltar ao topo"
         className="lg:hidden fixed top-4 left-4 z-[999] bg-white/90 backdrop-blur-md border border-purple-200 shadow-md px-3 py-2 rounded-xl"
-        aria-label="Voltar para o topo"
       >
         <img src={lucyLogo} className="h-6 w-auto" alt="LucyFit" />
       </button>
 
-      {/* BLOBS — DESKTOP ONLY */}
+      {/* DESKTOP */}
       {!isMobile && (
         <>
           <motion.div
@@ -76,20 +60,19 @@ const Hero = () => {
             tecnologia de ponta direto no seu WhatsApp.
           </p>
 
-          {/* MOBILE GIF — carregamento atrasado */}
-          {isMobile && showGif && (
-            <div className="pt-4">
-              <div className="mx-auto max-w-md rounded-3xl bg-white border border-purple-200 shadow-xl overflow-hidden">
-                <img
-                  src={heroGif}
-                  alt="LucyFit conversando no WhatsApp"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full object-cover"
-                />
-              </div>
+          {/* gif puro do mobile */}
+          <div className="lg:hidden pt-6">
+            <div className="mx-auto max-w-md overflow-hidden">
+              <img
+                src={heroGif}
+                alt="LucyFit conversando no WhatsApp"
+                width={390}
+                height={780}
+                className="w-full rounded-2xl"
+                style={{ contain: "layout paint" }}
+              />
             </div>
-          )}
+          </div>
 
           {/* CTA */}
           <div className="flex justify-center lg:justify-start pt-4">
@@ -104,29 +87,50 @@ const Hero = () => {
           {/* MÉTRICAS */}
           <div className="flex justify-center lg:justify-start gap-8 pt-6 text-sm text-gray-600">
             <div className="text-center">
-              <strong className="block text-purple-600 text-lg">+2.000</strong>
-              pessoas já usaram
+              <strong className="block text-purple-600 text-lg">+50.mil</strong>
+              alimentos registrados
             </div>
             <div className="text-center">
-              <strong className="block text-purple-600 text-lg">+50 mil</strong>
+              <strong className="block text-purple-600 text-lg">+10 mil</strong>
               usuários ativos
             </div>
             <div className="text-center">
-              <strong className="block text-purple-600 text-lg">+200kg</strong>
-              eliminados
+              <strong className="block text-purple-600 text-lg">+1.500kg</strong>
+              perdidos
+            </div>
+          </div>
+
+          {/* usuarios */}
+          <div className="pt-8 flex flex-col items-center lg:items-start gap-2">
+            <p className="text-sm text-gray-600 font-medium">
+              Nossos usuários aprovaram
+            </p>
+
+            <div className="flex items-center gap-4">
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    size={22}
+                    className="fill-yellow-400 text-yellow-400 drop-shadow"
+                  />
+                ))}
+              </div>
+
+              <span className="text-sm font-semibold text-gray-700">
+                4.95/5
+              </span>
             </div>
           </div>
         </div>
 
-        {/* DESKTOP GIF */}
+        {/* card desktop */}
         {!isMobile && (
           <div className="hidden lg:flex justify-center">
             <div className="rounded-[32px] bg-white border border-purple-200 shadow-2xl overflow-hidden max-w-xl">
               <img
                 src={heroGif}
                 alt="LucyFit conversando no WhatsApp"
-                loading="eager"
-                decoding="async"
                 className="w-full object-cover"
               />
             </div>

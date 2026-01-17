@@ -27,7 +27,7 @@ const monthlyBase = {
   ],
   cta: {
     text: "Assinar mensal",
-    href: "https://pay.hotmart.com/K102603335O?off=oe515n4q&checkoutMode=10&bid=1765197985158",
+    href: "https://pay.hotmart.com/K102603335O?off=oe515n4q&checkoutMode=10&bid=1768594293914",
   },
 };
 

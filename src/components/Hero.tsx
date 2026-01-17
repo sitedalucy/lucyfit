@@ -48,16 +48,14 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            A forma mais simples de organizar sua alimentação, treinos e evolução
-            é com a{" "}
+            Uma assistente fitness no WhatsApp pra te ajudar a ficar em forma{" "}
             <span className="inline-flex items-center px-4 py-2 bg-white rounded-2xl shadow-md">
               <img src={lucyLogo} className="h-9" alt="LucyFit" />
             </span>
           </h1>
 
           <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
-            Monitore treinos, acompanhe alimentação e alcance seus objetivos com
-            tecnologia de ponta direto no seu WhatsApp.
+            Entenda o que você come e veja seu corpo mudar de verdade. Mande foto do prato, tire dúvidas por áudio e ajuste sua rotina por menos de R$1 por dia.
           </p>
 
           {/* gif puro do mobile */}
